@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U.S. Rare Earth Magnet Supply Chain — Volume & Stage Table | QT Magnetic Solutions</title>
+  <meta name="description" content="Sortable table of all 17 U.S. rare earth magnet supply chain companies by stage maturity, current production volume, and projected future capacity. Published by QT Magnetic Solutions.">
+  <meta name="author" content="QT Magnetic Solutions">
+
+  <style>
+    :root {
+      --bg: #053A5C;
+      --bg-deep: #031f38;
+      --bg-card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.12);
+      --border-strong: rgba(255,255,255,0.22);
+      --text: #ffffff;
+      --text-muted: rgba(255,255,255,0.62);
+      --text-dim: rgba(255,255,255,0.38);
+      --accent: #1F959A;
+      --font: "DIN Next LT Pro Light", "DIN Next LT Pro", "Avenir LT Pro 35 Light", Avenir, Helvetica, "Helvetica Neue", Arial, sans-serif;
+
+      --upstream: #5eadff;
+      --upstream-light: rgba(94,173,255,0.12);
+      --midstream: #fbbf24;
+      --midstream-light: rgba(251,191,36,0.12);
+      --downstream: #a0aec0;
+      --downstream-light: rgba(160,174,192,0.10);
+
+      --commercial: #34d399;
+      --commissioning: #60a5fa;
+      --pilot: #fbbf24;
+      --development: #fb923c;
+      --announced: #94a3b8;
+      --paused: #f87171;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--bg-deep);
+      color: var(--text-muted);
+      padding: 0.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header a { color: var(--accent); }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, #031f38 0%, #053A5C 60%, #064465 100%);
+      border-bottom: 1px solid var(--border);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+    }
+    .hero-inner { max-width: 1400px; margin: 0 auto; }
+    .hero-inner h1 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .hero-inner h1 span { color: var(--accent); }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.62);
+      max-width: 760px;
+      margin-bottom: 1.25rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .hero-meta .dot { width: 6px; height: 6px; background: var(--commercial); border-radius: 50%; display: inline-block; }
+
+    /* ── PIPELINE DIAGRAM ── */
+    .pipeline-section {
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--border);
+      padding: 1.75rem 2rem;
+    }
+    .pipeline-section h2 {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+    .pipeline-inner { max-width: 1400px; margin: 0 auto; }
+    .pipeline-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    .pipeline-segment { display: flex; flex-direction: column; gap: 0; }
+    .pipeline-segment-label {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px 3px 0 0;
+      margin-bottom: 1px;
+      text-align: center;
+    }
+    .segment-upstream .pipeline-segment-label { background: rgba(94,173,255,0.2); color: var(--upstream); }
+    .segment-midstream .pipeline-segment-label { background: rgba(251,191,36,0.2); color: var(--midstream); }
+    .segment-downstream .pipeline-segment-label { background: rgba(160,174,192,0.15); color: var(--downstream); }
+    .pipeline-stages { display: flex; align-items: center; gap: 0; }
+    .pipeline-stage { display: flex; align-items: center; gap: 0; }
+    .stage-box {
+      padding: 0.5rem 0.85rem;
+      font-size: 0.72rem;
+      font-weight: 400;
+      white-space: nowrap;
+      border: 1px solid;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .segment-upstream .stage-box { background: rgba(94,173,255,0.08); border-color: rgba(94,173,255,0.22); color: rgba(94,173,255,0.85); }
+    .segment-midstream .stage-box { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.22); color: rgba(251,191,36,0.85); }
+    .segment-downstream .stage-box { background: rgba(160,174,192,0.06); border-color: rgba(160,174,192,0.18); color: rgba(160,174,192,0.8); }
+    .pipeline-arrow { font-size: 0.9rem; color: var(--text-dim); padding: 0 0.15rem; flex-shrink: 0; }
+    .pipeline-divider { width: 2px; height: 42px; background: var(--border); margin: 0 0.5rem; flex-shrink: 0; }
+    .recycle-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+      padding-left: 1rem;
+      font-style: italic;
+    }
+
+    /* ── FILTERS ── */
+    .filter-section {
+      max-width: 1400px;
+      margin: 1.5rem auto 1rem;
+      padding: 0 2rem;
+    }
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .filter-label {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .filter-group { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .filter-btn {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 0.78rem;
+      font-weight: 400;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.15s;
+      font-family: var(--font);
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .filter-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+    .filter-count {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .search-input {
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      font-size: 0.82rem;
+      color: var(--text);
+      outline: none;
+      min-width: 180px;
+      font-family: var(--font);
+    }
+    .search-input::placeholder { color: var(--text-dim); }
+    .search-input:focus { border-color: var(--accent); }
+
+    /* ── TABLE ── */
+    .table-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+    .table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    thead tr {
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid var(--border-strong);
+    }
+    thead th {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      font-size: 0.68rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-dim);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.12s;
+    }
+    thead th:hover { color: var(--accent); }
+    thead th.sort-asc .sort-icon::after { content: " ↑"; color: var(--accent); }
+    thead th.sort-desc .sort-icon::after { content: " ↓"; color: var(--accent); }
+    thead th .sort-icon::after { content: " ↕"; opacity: 0.3; font-size: 0.7em; }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.04); }
+    tbody tr.hidden { display: none; }
+
+    td {
+      padding: 0.85rem 1rem;
+      vertical-align: middle;
+      color: var(--text-muted);
+    }
+
+    /* Company cell */
+    .td-company { min-width: 190px; }
+    .company-name {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.15rem;
+    }
+    .company-ticker {
+      font-size: 0.68rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background: rgba(31,149,154,0.12);
+      border: 1px solid rgba(31,149,154,0.25);
+      color: var(--accent);
+      display: inline-block;
+    }
+    .company-loc {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+
+    /* Segment badges */
+    .segment-badge {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      display: inline-block;
+      margin: 0.1rem 0.15rem 0.1rem 0;
+      white-space: nowrap;
+    }
+    .badge-upstream { background: var(--upstream-light); color: var(--upstream); border: 1px solid rgba(94,173,255,0.25); }
+    .badge-midstream { background: var(--midstream-light); color: var(--midstream); border: 1px solid rgba(251,191,36,0.25); }
+    .badge-downstream { background: var(--downstream-light); color: var(--downstream); border: 1px solid rgba(160,174,192,0.2); }
+
+    /* Maturity badge */
+    .maturity-badge {
+      font-size: 0.68rem;
+      font-weight: 400;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      white-space: nowrap;
+    }
+    .maturity-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .mat-commercial { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.35); color: #6ee7b7; }
+    .mat-commercial::before { background: var(--commercial); }
+    .mat-commissioning { background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.35); color: #93c5fd; }
+    .mat-commissioning::before { background: var(--commissioning); }
+    .mat-pilot { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.35); color: #fcd34d; }
+    .mat-pilot::before { background: var(--pilot); }
+    .mat-development { background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.35); color: #fdba74; }
+    .mat-development::before { background: var(--development); }
+    .mat-announced { background: rgba(148,163,184,0.08); border-color: rgba(148,163,184,0.25); color: #94a3b8; }
+    .mat-announced::before { background: var(--announced); }
+    .mat-paused { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.35); color: #fca5a5; }
+    .mat-paused::before { background: var(--paused); }
+    .mat-mixed { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: var(--text-muted); }
+    .mat-mixed::before { background: linear-gradient(90deg, var(--commercial) 50%, var(--commissioning) 50%); }
+
+    /* Volume cells */
+    .td-vol { min-width: 160px; }
+    .vol-number {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .vol-unit {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      display: block;
+    }
+    .vol-na { color: var(--text-dim); font-size: 0.8rem; font-style: italic; }
+    .vol-note { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.15rem; display: block; }
+    .vol-warning { color: var(--paused); font-size: 0.72rem; }
+
+    /* Key stages cell */
+    .td-stages { min-width: 200px; max-width: 260px; }
+    .stage-pill {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-dim);
+      display: inline-block;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+      white-space: nowrap;
+    }
+
+    /* Year cell */
+    .td-year { min-width: 90px; text-align: center; }
+    .year-val { font-size: 0.9rem; color: var(--text-muted); }
+    .year-uncertain { color: var(--text-dim); font-size: 0.78rem; font-style: italic; }
+
+    /* Legend */
+    .legend-section {
+      max-width: 1400px;
+      margin: 0 auto 1.25rem;
+      padding: 0 2rem;
+    }
+    .legend-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.25rem;
+    }
+    .legend-inner h3 {
+      font-size: 0.68rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0,0,0,0.25);
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 2rem;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    footer a { color: var(--accent); }
+    footer strong { color: var(--text-muted); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-hero { padding: 2rem 1.25rem 1.75rem; }
+      .hero-inner h1 { font-size: 1.5rem; }
+      .filter-section, .legend-section, .table-section { padding: 0 1rem; }
+      .site-header { flex-direction: column; gap: 0.25rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="site-header">
+  <span><a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · Research &amp; Intelligence</span>
+  <span>Last Updated: <strong style="color:white">June 2026</strong> · <a href="index.html">← Full Company Dashboard</a></span>
+</div>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <h1>U.S. Rare Earth Magnet Supply Chain — <span>Volume &amp; Stage Table</span></h1>
+    <p class="hero-subtitle">
+      All 17 tracked companies sorted by current production volume, stage maturity, segment, or projected capacity.
+      Click any column header to sort. Use filters to narrow by segment or maturity status.
+    </p>
+    <div class="hero-meta">
+      <span><span class="dot"></span> 17 companies tracked</span>
+      <span>·</span>
+      <span>Click headers to sort</span>
+      <span>·</span>
+      <span>Data current through June 2026</span>
+      <span>·</span>
+      <span><a href="index.html">View full company profiles →</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- Supply Chain Pipeline -->
+<section class="pipeline-section" aria-label="Supply chain pipeline overview">
+  <div class="pipeline-inner">
+    <h2>The Rare Earth Permanent Magnet Supply Chain</h2>
+    <div class="pipeline-flow" role="img" aria-label="Supply chain stages from upstream mining through downstream magnet manufacturing">
+      <div class="pipeline-segment segment-upstream">
+        <div class="pipeline-segment-label">Upstream</div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="stage-box">Mining &amp;<br>Extraction</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Benefici&shy;ation</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Hydro&shy;metallurgy</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">End-of-Life<br>Recycling</div>
+            <span class="pipeline-arrow">↘</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-divider"></div>
+
+      <div class="pipeline-segment segment-midstream">
+        <div class="pipeline-segment-label">Midstream</div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="stage-box">Separation</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">REE<br>Oxides</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Reduction</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Re-metal</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Alloy &amp; Powder<br>Manufacture</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-divider"></div>
+
+      <div class="pipeline-segment segment-downstream">
+        <div class="pipeline-segment-label">Downstream</div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="stage-box">Magnet<br>Manufacture</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Assembly<br>Manufacture</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">End-Use<br>Products</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="recycle-badge">♻ End-of-Life Recycling re-enters the pipeline at Separation / Midstream, reducing dependence on primary mining.</div>
+  </div>
+</section>
+
+<!-- Maturity Legend -->
+<div class="legend-section" style="margin-top:1.5rem">
+  <div class="legend-inner">
+    <h3>Stage Maturity</h3>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> Commercial — Operating at scale with revenue</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div> Commissioning — Facility built, in ramp phase</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div> Pilot / Demo — Small-scale operations underway</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fb923c"></div> Development — Under development; no commercial output</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#94a3b8"></div> Announced — Intent stated; no development underway</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div> Paused / Suspended — Operations halted</div>
+    </div>
+  </div>
+</div>
+
+<!-- Filters -->
+<div class="filter-section">
+  <div class="filter-bar">
+    <span class="filter-label">Segment</span>
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="segment" data-value="all">All</button>
+      <button class="filter-btn" data-filter="segment" data-value="upstream">Upstream</button>
+      <button class="filter-btn" data-filter="segment" data-value="midstream">Midstream</button>
+      <button class="filter-btn" data-filter="segment" data-value="downstream">Downstream</button>
+    </div>
+    <div class="filter-sep"></div>
+    <span class="filter-label">Maturity</span>
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="maturity" data-value="all">All</button>
+      <button class="filter-btn" data-filter="maturity" data-value="commercial">Commercial</button>
+      <button class="filter-btn" data-filter="maturity" data-value="commissioning">Commissioning</button>
+      <button class="filter-btn" data-filter="maturity" data-value="pilot">Pilot/Demo</button>
+      <button class="filter-btn" data-filter="maturity" data-value="development">Development</button>
+    </div>
+    <div class="filter-sep"></div>
+    <input type="search" class="search-input" id="tableSearch" placeholder="Search companies…" aria-label="Search companies">
+    <span class="filter-count" id="filterCount">Showing 17 of 17 companies</span>
+  </div>
+</div>
+
+<!-- Table -->
+<div class="table-section">
+  <div class="table-wrap">
+    <table id="mainTable" aria-label="U.S. rare earth magnet supply chain companies — volume and stage">
+      <thead>
+        <tr>
+          <th data-col="company" class="sort-asc">Company <span class="sort-icon"></span></th>
+          <th data-col="segment">Segment <span class="sort-icon"></span></th>
+          <th data-col="maturity">Maturity <span class="sort-icon"></span></th>
+          <th data-col="stages">Key Stages <span class="sort-icon"></span></th>
+          <th data-col="current">Current Volume <span class="sort-icon"></span></th>
+          <th data-col="projected">Projected Volume <span class="sort-icon"></span></th>
+          <th data-col="year">Target Year <span class="sort-icon"></span></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+
+        <!-- MP MATERIALS -->
+        <tr data-segments="upstream midstream downstream" data-maturity="commercial commissioning" data-name="mp materials corp mountain pass fort worth northlake" data-current="1000" data-projected="11000" data-year="2027" data-maturity-order="1">
+          <td class="td-company">
+            <div class="company-name">MP Materials Corp.</div>
+            <span class="company-ticker">NYSE: MP</span>
+            <div class="company-loc">Las Vegas, NV / Fort Worth, TX</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-upstream">Upstream</span>
+            <span class="segment-badge badge-midstream">Midstream</span>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-mixed">Commercial / Commissioning</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Mining</span>
+            <span class="stage-pill">Separation</span>
+            <span class="stage-pill">RE Oxides</span>
+            <span class="stage-pill">Re-metal</span>
+            <span class="stage-pill">Magnet Mfr</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">~1,000</div>
+            <span class="vol-unit">MT/yr NdFeB magnets (Fort Worth)</span>
+            <span class="vol-note">917 MT NdPr oxide Q1 2026 (record)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">~11,000</div>
+            <span class="vol-unit">MT/yr magnets (Fort Worth + Northlake)</span>
+            <span class="vol-note">10,000 MT/yr Northlake plant groundbreaking 2026</span>
+          </td>
+          <td class="td-year"><span class="year-val">2027+</span></td>
+        </tr>
+
+        <!-- USA RARE EARTH -->
+        <tr data-segments="upstream midstream downstream" data-maturity="commercial commissioning development" data-name="usa rare earth USAR stillwater oklahoma round top LCM less common metals serra verde" data-current="600" data-projected="10000" data-year="2028" data-maturity-order="1">
+          <td class="td-company">
+            <div class="company-name">USA Rare Earth, Inc.</div>
+            <span class="company-ticker">NASDAQ: USAR</span>
+            <div class="company-loc">NY / Stillwater, OK / Hudspeth, TX / UK</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-upstream">Upstream</span>
+            <span class="segment-badge badge-midstream">Midstream</span>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-mixed">Commercial / Commissioning</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Separation (LCM, UK)</span>
+            <span class="stage-pill">Alloy &amp; Powder</span>
+            <span class="stage-pill">Magnet Mfr</span>
+            <span class="stage-pill">Mining (dev.)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">~600</div>
+            <span class="vol-unit">MT/yr NdFeB magnets (Phase 1a)</span>
+            <span class="vol-note">Stillwater, OK — commercial since March 2026</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">10,000</div>
+            <span class="vol-unit">MT/yr magnets (full buildout)</span>
+            <span class="vol-note">Pending Serra Verde acquisition for HREE feedstock</span>
+          </td>
+          <td class="td-year"><span class="year-val">2028+</span></td>
+        </tr>
+
+        <!-- eVAC MAGNETICS -->
+        <tr data-segments="downstream" data-maturity="commissioning" data-name="eVAC magnetics VAC Sumter South Carolina NdFeB sintered" data-current="2000" data-projected="12000" data-year="2029" data-maturity-order="2">
+          <td class="td-company">
+            <div class="company-name">eVAC Magnetics LLC</div>
+            <span class="company-ticker">Private / VAC (DE)</span>
+            <div class="company-loc">Sumter, South Carolina</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-commissioning">Commissioning</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Magnet Mfr (NdFeB)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">2,000</div>
+            <span class="vol-unit">MT/yr NdFeB (target Q1 2026)</span>
+            <span class="vol-note">First US NdFeB sale Dec 2025; ramp ongoing</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">12,000</div>
+            <span class="vol-unit">MT/yr NdFeB</span>
+            <span class="vol-note">$500M+ total investment; $111.9M QAEP tax credit</span>
+          </td>
+          <td class="td-year"><span class="year-val">2029</span></td>
+        </tr>
+
+        <!-- NOVEON MAGNETICS -->
+        <tr data-segments="downstream" data-maturity="commercial" data-name="Noveon Magnetics Urban Mining Company EcoFlux San Marcos Texas recycled NdFeB GM ABB Nidec" data-current="2000" data-projected="10000" data-year="2028" data-maturity-order="1">
+          <td class="td-company">
+            <div class="company-name">Noveon Magnetics, Inc.</div>
+            <span class="company-ticker">Private</span>
+            <div class="company-loc">San Marcos, Texas</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-commercial">Commercial</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">EOL Recycling</span>
+            <span class="stage-pill">Alloy (M2M®)</span>
+            <span class="stage-pill">Magnet Mfr</span>
+            <span class="stage-pill">Assembly</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">~2,000</div>
+            <span class="vol-unit">MT/yr NdFeB (ramping)</span>
+            <span class="vol-note">Recycled feedstock via GBE® + M2M® process</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">10,000</div>
+            <span class="vol-unit">MT/yr NdFeB</span>
+            <span class="vol-note">San Marcos facility designed capacity; $215M Series C Jan 2026</span>
+          </td>
+          <td class="td-year"><span class="year-val">2028+</span></td>
+        </tr>
+
+        <!-- ENERGY FUELS -->
+        <tr data-segments="midstream" data-maturity="commercial pilot" data-name="Energy Fuels White Mesa Mill uranium dysprosium terbium NdPr oxide separation Utah UUUU" data-current="500" data-projected="1000" data-year="2027" data-maturity-order="1">
+          <td class="td-company">
+            <div class="company-name">Energy Fuels Inc.</div>
+            <span class="company-ticker">NYSE: UUUU</span>
+            <div class="company-loc">White Mesa Mill, Utah</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+          </td>
+          <td><span class="maturity-badge mat-mixed">Commercial / Pilot→Com</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Separation (LREE)</span>
+            <span class="stage-pill">Separation (HREE)</span>
+            <span class="stage-pill">RE Oxides</span>
+            <span class="stage-pill">Reduction (via ASM)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">~500</div>
+            <span class="vol-unit">MT/yr NdPr oxide (est. current)</span>
+            <span class="vol-note">Only US commercial HREE oxide producer (Dy, Tb)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">850–1,000</div>
+            <span class="vol-unit">MT/yr NdPr + 35 MT Dy + 12 MT Tb</span>
+            <span class="vol-note">Phase 1 from ~10,000 MT/yr monazite input</span>
+          </td>
+          <td class="td-year"><span class="year-val">2027</span></td>
+        </tr>
+
+        <!-- ARNOLD MAGNETIC TECHNOLOGIES -->
+        <tr data-segments="downstream" data-maturity="commercial" data-name="Arnold Magnetic Technologies Rochester New York NdFeB SmCo samarium cobalt CODI" data-current="999" data-projected="999" data-year="2027" data-maturity-order="1">
+          <td class="td-company">
+            <div class="company-name">Arnold Magnetic Technologies</div>
+            <span class="company-ticker">Sub. of NYSE: CODI</span>
+            <div class="company-loc">Rochester, New York</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-commercial">Commercial</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Magnet Mfr (NdFeB)</span>
+            <span class="stage-pill">Magnet Mfr (SmCo)</span>
+            <span class="stage-pill">Assembly</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Commercial scale; 130-year history; DFARS transition underway</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">USAR/LCM ex-China alloy supply agreement Mar 2026</span>
+          </td>
+          <td class="td-year"><span class="year-val">2027</span><br><span class="year-uncertain">DFARS deadline</span></td>
+        </tr>
+
+        <!-- ELECTRON ENERGY CORPORATION -->
+        <tr data-segments="midstream downstream" data-maturity="commercial commissioning" data-name="Electron Energy Corporation EEC samarium cobalt SmCo DFARS Landisville Pennsylvania" data-current="998" data-projected="998" data-year="2026" data-maturity-order="1">
+          <td class="td-company">
+            <div class="company-name">Electron Energy Corporation</div>
+            <span class="company-ticker">Private (Tinicum PE)</span>
+            <div class="company-loc">Landisville, Pennsylvania</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-mixed">Commercial / Commissioning</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Alloy &amp; Powder</span>
+            <span class="stage-pill">Magnet Mfr (SmCo)</span>
+            <span class="stage-pill">Magnet Mfr (NdFeB)</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Only DFARS-compliant US SmCo producer; capacity doubled 2025</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">NdFeB DFARS compliance targeted mid-2026</span>
+          </td>
+          <td class="td-year"><span class="year-val">2026</span><br><span class="year-uncertain">NdFeB DFARS</span></td>
+        </tr>
+
+        <!-- LYNAS US OPERATIONS -->
+        <tr data-segments="midstream" data-maturity="commissioning paused" data-name="Lynas Rare Earths Texas Hondo Seadrift separation HREE dysprosium terbium" data-current="0" data-projected="5000" data-year="2026" data-maturity-order="2">
+          <td class="td-company">
+            <div class="company-name">Lynas Rare Earths — US Ops</div>
+            <span class="company-ticker">Parent: ASX: LYC</span>
+            <div class="company-loc">Hondo, TX / Seadrift, TX</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+          </td>
+          <td><span class="maturity-badge mat-mixed">Commissioning / Paused ⚠</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Separation — LREE</span>
+            <span class="stage-pill">Separation — HREE ⚠</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">0</div>
+            <span class="vol-unit">MT/yr (pre-production)</span>
+            <span class="vol-note">Hondo commissioning FY2026; Seadrift construction halted</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">5,000</div>
+            <span class="vol-unit">MT/yr NdPr (Hondo)</span>
+            <span class="vol-note"><span class="vol-warning">⚠ Seadrift (2,500–3,000 MT/yr HREE) "unlikely to proceed"</span></span>
+          </td>
+          <td class="td-year"><span class="year-val">2026</span><br><span class="year-uncertain">Hondo only</span></td>
+        </tr>
+
+        <!-- PHOENIX TAILINGS -->
+        <tr data-segments="midstream" data-maturity="pilot" data-name="Phoenix Tailings Exeter New Hampshire rare earth metallization reduction BMW Yamaha Motor" data-current="200" data-projected="1000" data-year="2027" data-maturity-order="3">
+          <td class="td-company">
+            <div class="company-name">Phoenix Tailings, Inc.</div>
+            <span class="company-ticker">Private (BMW, Yamaha)</span>
+            <div class="company-loc">Burlington, MA / Exeter, NH</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+          </td>
+          <td><span class="maturity-badge mat-pilot">Pilot / Demo</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Reduction / Re-metal</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">~200</div>
+            <span class="vol-unit">MT/yr RE metals (Nd, Pr, Dy, Tb)</span>
+            <span class="vol-note">Exeter, NH facility opened Oct 2025; zero Chinese inputs</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">1,000+</div>
+            <span class="vol-unit">MT/yr RE metals</span>
+            <span class="vol-note">Stated as sufficient for entire US defense RE metals need</span>
+          </td>
+          <td class="td-year"><span class="year-val">2026–27</span></td>
+        </tr>
+
+        <!-- RELEMENT TECHNOLOGIES -->
+        <tr data-segments="midstream" data-maturity="pilot" data-name="ReElement Technologies AREC American Resources Noblesville Marion Indiana chromatographic separation" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3">
+          <td class="td-company">
+            <div class="company-name">ReElement Technologies Corp.</div>
+            <span class="company-ticker">Parent: NASDAQ: AREC</span>
+            <div class="company-loc">Noblesville, IN / Marion, IN</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+          </td>
+          <td><span class="maturity-badge mat-pilot">Pilot → Commercial</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Separation (chrom.)</span>
+            <span class="stage-pill">RE Oxides (99.5–99.999%)</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Noblesville pilot; first commercial revenues targeted 2026</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Marion, IN 400,000 sq ft expansion; $1.4B Vulcan supply agreement</span>
+          </td>
+          <td class="td-year"><span class="year-val">2026+</span></td>
+        </tr>
+
+        <!-- MOMENTUM TECHNOLOGIES -->
+        <tr data-segments="midstream" data-maturity="pilot" data-name="Momentum Technologies MSX membrane solvent extraction Carrollton Texas Oak Ridge magnet swarf TechMet" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3">
+          <td class="td-company">
+            <div class="company-name">Momentum Technologies, Inc.</div>
+            <span class="company-ticker">Private (TechMet, Tailwater)</span>
+            <div class="company-loc">Dallas / Carrollton, Texas</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+          </td>
+          <td><span class="maturity-badge mat-pilot">Pilot → Commercial</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Separation (MSX®)</span>
+            <span class="stage-pill">RE Oxides (99.9%+)</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Carrollton commercial-scale processing began Oct 2025</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">+2 additional plants planned 2027 (one REE, one battery)</span>
+          </td>
+          <td class="td-year"><span class="year-val">2026–27</span></td>
+        </tr>
+
+        <!-- AMERICAN RESOURCES / EMCO -->
+        <tr data-segments="upstream" data-maturity="pilot" data-name="American Resources Corporation AREC Electrified Materials EMCO Noblesville Indiana e-waste recycling" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3">
+          <td class="td-company">
+            <div class="company-name">American Resources / Electrified Materials</div>
+            <span class="company-ticker">NASDAQ: AREC</span>
+            <div class="company-loc">Fishers / Noblesville, Indiana</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-upstream">Upstream</span>
+          </td>
+          <td><span class="maturity-badge mat-pilot">Pilot</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">EOL Recycling (EMCO)</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">RCRA-permitted May 2025; feeds ReElement for separation</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Expanded pre-processing capacity Mar 2026; volumes not disclosed</span>
+          </td>
+          <td class="td-year"><span class="year-val">2026+</span></td>
+        </tr>
+
+        <!-- ADVANCED MAGNET LAB -->
+        <tr data-segments="downstream" data-maturity="pilot" data-name="Advanced Magnet Lab AML Melbourne Florida PM-Wire NdFeB DLA Defense Logistics Agency" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3">
+          <td class="td-company">
+            <div class="company-name">Advanced Magnet Lab, Inc. (AML)</div>
+            <span class="company-ticker">Private (RMHC)</span>
+            <div class="company-loc">Melbourne, Florida</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-pilot">Pilot</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Magnet Mfr (PM-Wire™)</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">$2M DLA contract May 2026; specialty geometry NdFeB for defense</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">Qualification phase; scale-up follows DLA contract completion</span>
+          </td>
+          <td class="td-year"><span class="year-val">2027+</span></td>
+        </tr>
+
+        <!-- VULCAN ELEMENTS -->
+        <tr data-segments="downstream" data-maturity="development" data-name="Vulcan Elements Benson North Carolina NdFeB magnet factory DoD OSC loan" data-current="0" data-projected="10000" data-year="2030" data-maturity-order="4">
+          <td class="td-company">
+            <div class="company-name">Vulcan Elements, Inc.</div>
+            <span class="company-ticker">Private</span>
+            <div class="company-loc">Research Triangle Park / Benson, NC</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-development">Development</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Magnet Mfr (planned)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">0</div>
+            <span class="vol-unit">MT/yr (pre-production)</span>
+            <span class="vol-note">Groundbreaking expected 2026; 1M sq ft Benson, NC facility</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">10,000</div>
+            <span class="vol-unit">MT/yr NdFeB</span>
+            <span class="vol-note">$620M DoD OSC loan; $1.4B ReElement supply agreement</span>
+          </td>
+          <td class="td-year"><span class="year-val">2030+</span><br><span class="year-uncertain">4–6 yrs post-finance</span></td>
+        </tr>
+
+        <!-- NIRON MAGNETICS -->
+        <tr data-segments="downstream" data-maturity="development" data-name="Niron Magnetics iron nitride FeN rare earth free Sartell Minnesota ARPA-E" data-current="0" data-projected="1500" data-year="2027" data-maturity-order="4">
+          <td class="td-company">
+            <div class="company-name">Niron Magnetics, Inc. ⚠️ RE-Free</div>
+            <span class="company-ticker">Private (ARPA-E)</span>
+            <div class="company-loc">Minneapolis / Sartell, Minnesota</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-development">Development</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Magnet Mfr (FeN, RE-free)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">0</div>
+            <span class="vol-unit">MT/yr (pre-production)</span>
+            <span class="vol-note">Sartell groundbreaking Sept 2025; operations target early 2027</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">1,500 → 10,000+</div>
+            <span class="vol-unit">MT/yr (Phase 1 → Phase 2)</span>
+            <span class="vol-note">Second 10,000 MT/yr plant in site selection ($1.8B est.)</span>
+          </td>
+          <td class="td-year"><span class="year-val">2027 / 2030+</span></td>
+        </tr>
+
+        <!-- REALLOYS -->
+        <tr data-segments="midstream downstream" data-maturity="development" data-name="REalloys ALOY JOGMEC Japan Euclid Ohio Saskatchewan magnets defense" data-current="0" data-projected="10000" data-year="2027" data-maturity-order="4">
+          <td class="td-company">
+            <div class="company-name">REalloys, Inc.</div>
+            <span class="company-ticker">NASDAQ: ALOY</span>
+            <div class="company-loc">Texas / Euclid, OH / Saskatchewan, CA</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-midstream">Midstream</span>
+            <span class="segment-badge badge-downstream">Downstream</span>
+          </td>
+          <td><span class="maturity-badge mat-development">Development</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">Separation (planned)</span>
+            <span class="stage-pill">Alloy &amp; Powder (planned)</span>
+            <span class="stage-pill">Magnet Mfr (Euclid, OH)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">0</div>
+            <span class="vol-unit">MT/yr (pre-production)</span>
+            <span class="vol-note">JOGMEC MOU Oct 2025; first-ever US–Japan RE partnership</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">10,000</div>
+            <span class="vol-unit">MT/yr NdFeB + SmCo</span>
+            <span class="vol-note">Japanese technology transfer; production target 2027 (compressed)</span>
+          </td>
+          <td class="td-year"><span class="year-val">2027</span><br><span class="year-uncertain">Timeline optimistic</span></td>
+        </tr>
+
+        <!-- US STRATEGIC METALS -->
+        <tr data-segments="upstream midstream" data-maturity="announced" data-name="US Strategic Metals Fredericktown Missouri Ionic Rare Earths MOU magnet recycling Madison mine" data-current="0" data-projected="0" data-year="9999" data-maturity-order="5">
+          <td class="td-company">
+            <div class="company-name">US Strategic Metals, LLC</div>
+            <span class="company-ticker">Private</span>
+            <div class="company-loc">Fredericktown, Missouri</div>
+          </td>
+          <td>
+            <span class="segment-badge badge-upstream">Upstream</span>
+            <span class="segment-badge badge-midstream">Midstream</span>
+          </td>
+          <td><span class="maturity-badge mat-announced">Announced</span></td>
+          <td class="td-stages">
+            <span class="stage-pill">EOL Recycling (planned)</span>
+            <span class="stage-pill">Separation (announced)</span>
+          </td>
+          <td class="td-vol">
+            <div class="vol-number">0</div>
+            <span class="vol-unit">MT/yr (MOU stage only)</span>
+            <span class="vol-note">No financing or timeline disclosed; 1,800-acre Madison mine site</span>
+          </td>
+          <td class="td-vol">
+            <span class="vol-na">Undisclosed</span>
+            <span class="vol-note">NdPr, Dy, Tb oxides from recycled feedstock via Ionic tech</span>
+          </td>
+          <td class="td-year"><span class="year-uncertain">TBD</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width:1400px; margin:0 auto;">
+    <p style="margin-bottom:0.75rem">
+      <strong>U.S. Rare Earth Magnet Supply Chain — Volume &amp; Stage Table</strong><br>
+      Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> ·
+      <a href="index.html">← View Full Company Dashboard</a>
+    </p>
+    <p style="margin-bottom:0.75rem; font-size:0.75rem">
+      Data current through June 2026 · 17 companies tracked · All volume figures are approximate and sourced from company disclosures
+    </p>
+    <p style="font-size:0.72rem; color:var(--text-dim)">
+      This dashboard is provided for research and informational purposes. Nothing herein constitutes investment advice.
+    </p>
+  </div>
+</footer>
+
+<script>
+  let segmentFilter = 'all';
+  let maturityFilter = 'all';
+  let searchQuery = '';
+  let sortCol = 'company';
+  let sortDir = 'asc';
+
+  const MATURITY_ORDER = { commercial: 1, commissioning: 2, pilot: 3, development: 4, announced: 5, paused: 6 };
+
+  function getRowSortValue(row, col) {
+    switch (col) {
+      case 'company':
+        return row.dataset.name || '';
+      case 'segment': {
+        const segs = row.dataset.segments || '';
+        if (segs.includes('upstream')) return 'a';
+        if (segs.includes('midstream')) return 'b';
+        return 'c';
+      }
+      case 'maturity':
+        return parseInt(row.dataset.maturityOrder || '9', 10);
+      case 'stages': {
+        const pills = row.querySelectorAll('.stage-pill');
+        return pills.length ? pills[0].textContent.trim().toLowerCase() : '';
+      }
+      case 'current':
+        return parseInt(row.dataset.current || '0', 10);
+      case 'projected':
+        return parseInt(row.dataset.projected || '0', 10);
+      case 'year':
+        return parseInt(row.dataset.year || '9999', 10);
+      default:
+        return '';
+    }
+  }
+
+  function sortTable(col) {
+    if (sortCol === col) {
+      sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortCol = col;
+      sortDir = 'asc';
+    }
+
+    const tbody = document.getElementById('tableBody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+      const va = getRowSortValue(a, col);
+      const vb = getRowSortValue(b, col);
+      let cmp = 0;
+      if (typeof va === 'number' && typeof vb === 'number') {
+        cmp = va - vb;
+      } else {
+        cmp = String(va).localeCompare(String(vb));
+      }
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+
+    rows.forEach(r => tbody.appendChild(r));
+
+    // Update header classes
+    document.querySelectorAll('thead th').forEach(th => {
+      th.classList.remove('sort-asc', 'sort-desc');
+      if (th.dataset.col === col) {
+        th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+      }
+    });
+  }
+
+  function applyFilters() {
+    const rows = document.querySelectorAll('#tableBody tr');
+    let visible = 0;
+    rows.forEach(row => {
+      const segs = row.dataset.segments || '';
+      const mat = row.dataset.maturity || '';
+      const name = row.dataset.name || '';
+
+      const segMatch = segmentFilter === 'all' || segs.includes(segmentFilter);
+      const matMatch = maturityFilter === 'all' || mat.includes(maturityFilter);
+      const searchMatch = searchQuery === '' || name.includes(searchQuery.toLowerCase());
+
+      if (segMatch && matMatch && searchMatch) {
+        row.classList.remove('hidden');
+        visible++;
+      } else {
+        row.classList.add('hidden');
+      }
+    });
+    const total = rows.length;
+    document.getElementById('filterCount').textContent = `Showing ${visible} of ${total} companies`;
+  }
+
+  // Sort header clicks
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      sortTable(th.dataset.col);
+      applyFilters();
+    });
+  });
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterType = btn.dataset.filter;
+      const value = btn.dataset.value;
+      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (filterType === 'segment') segmentFilter = value;
+      if (filterType === 'maturity') maturityFilter = value;
+      applyFilters();
+    });
+  });
+
+  // Search
+  document.getElementById('tableSearch').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    applyFilters();
+  });
+
+  // Initial sort by company name
+  sortTable('company');
+</script>
+
+</body>
+</html>
