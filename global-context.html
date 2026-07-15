@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U.S. vs. Allies vs. China — Rare Earth Magnet Production | QT Magnetic Solutions</title>
+  <meta name="description" content="How U.S. rare earth magnet production compares to China and to allied nations (Japan, EU, South Korea, Australia) — current market share, the 2026–2030 buildout trajectory, and a stage-by-stage view of the supply chain. Published by QT Magnetic Solutions.">
+  <meta name="author" content="QT Magnetic Solutions">
+
+  <style>
+    :root {
+      --bg: #053A5C;
+      --bg-deep: #031f38;
+      --bg-card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.12);
+      --border-strong: rgba(255,255,255,0.22);
+      --text: #ffffff;
+      --text-muted: rgba(255,255,255,0.62);
+      --text-dim: rgba(255,255,255,0.38);
+      --accent: #1F959A;
+      --font: "DIN Next LT Pro Light", "DIN Next LT Pro", "Avenir LT Pro 35 Light", Avenir, Helvetica, "Helvetica Neue", Arial, sans-serif;
+
+      --upstream: #5eadff;
+      --midstream: #fbbf24;
+      --downstream: #a0aec0;
+
+      /* Categorical triad for China / Allies / US — validated with scripts/validate_palette.js
+         (dark mode, surface #053A5C): all four checks PASS. */
+      --c-china: #e2552e;
+      --c-allies: #3b82f6;
+      --c-us: #0d9488;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .site-header {
+      background: var(--bg-deep);
+      color: var(--text-muted);
+      padding: 0.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .site-header a { color: var(--accent); }
+    .site-header nav { display: flex; gap: 1rem; }
+
+    .page-hero {
+      background: linear-gradient(135deg, #031f38 0%, #053A5C 60%, #064465 100%);
+      border-bottom: 1px solid var(--border);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; }
+    .hero-inner h1 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .hero-inner h1 span { color: var(--accent); }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.62);
+      max-width: 820px;
+      margin-bottom: 1.25rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .hero-meta .dot { width: 6px; height: 6px; background: #34d399; border-radius: 50%; display: inline-block; }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    section.block { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+    section.block:last-of-type { border-bottom: none; }
+    .block h2 {
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin-bottom: 0.4rem;
+    }
+    .block .block-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── STAT TILES ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-tile {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.25rem 1.1rem;
+    }
+    .stat-tile .stat-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .stat-tile .stat-value {
+      font-size: 1.7rem;
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 0.25rem;
+    }
+    .stat-tile.china .stat-value { color: var(--c-china); }
+    .stat-tile.allies .stat-value { color: var(--c-allies); }
+    .stat-tile.us .stat-value { color: var(--c-us); }
+    .stat-tile .stat-note { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── SHARE BAR (part-to-whole, single stacked bar) ── */
+    .share-block { margin-bottom: 2rem; }
+    .share-block:last-child { margin-bottom: 0; }
+    .share-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+    .share-label-row .share-title { font-size: 0.85rem; color: var(--text-muted); }
+    .share-label-row .share-total { font-size: 0.78rem; color: var(--text-dim); }
+    .share-bar {
+      display: flex;
+      height: 40px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.25);
+    }
+    .share-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: white;
+      white-space: nowrap;
+      position: relative;
+      border-right: 2px solid var(--bg);
+    }
+    .share-seg:last-child { border-right: none; }
+    .share-seg .seg-pct { font-weight: 400; }
+    .share-seg.seg-china { background: var(--c-china); }
+    .share-seg.seg-allies { background: var(--c-allies); }
+    .share-seg.seg-us { background: var(--c-us); }
+    .share-seg.seg-other { background: rgba(255,255,255,0.14); color: var(--text-muted); }
+    .share-seg.too-thin .seg-pct { display: none; }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .legend-row .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .sw-china { background: var(--c-china); }
+    .sw-allies { background: var(--c-allies); }
+    .sw-us { background: var(--c-us); }
+    .sw-other { background: rgba(255,255,255,0.14); }
+
+    /* ── GROUPED BAR (US vs Allies trajectory) ── */
+    .traj-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.5rem 1rem;
+    }
+    .traj-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5rem;
+      height: 220px;
+      padding: 0 0.5rem;
+      border-bottom: 1px solid var(--border-strong);
+      position: relative;
+    }
+    .traj-year-group {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      flex: 1;
+      justify-content: center;
+      height: 100%;
+    }
+    .traj-bar-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+    .traj-bar {
+      width: 26px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      min-height: 3px;
+    }
+    .traj-bar.bar-us { background: var(--c-us); }
+    .traj-bar.bar-allies { background: var(--c-allies); }
+    .traj-bar-value {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+    }
+    .traj-axis-labels {
+      display: flex;
+      gap: 2.5rem;
+      padding: 0.6rem 0.5rem 0;
+    }
+    .traj-axis-labels .traj-year-label {
+      flex: 1;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .traj-note {
+      margin-top: 1.1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ── STAGE TABLE ── */
+    .stage-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    table.stage-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .stage-table thead tr { background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border-strong); }
+    .stage-table th {
+      padding: 0.8rem 1rem;
+      text-align: left;
+      font-size: 0.66rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .stage-table td { padding: 0.9rem 1rem; vertical-align: top; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .stage-table tr:last-child td { border-bottom: none; }
+    .stage-table .stage-name { color: var(--text); font-size: 0.9rem; }
+    .stage-table .stage-segment-tag {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: 0.3rem;
+    }
+    .seg-upstream { background: rgba(94,173,255,0.15); color: var(--upstream); }
+    .seg-midstream { background: rgba(251,191,36,0.15); color: var(--midstream); }
+    .seg-downstream { background: rgba(160,174,192,0.12); color: var(--downstream); }
+    .stage-table .us-figure { color: var(--c-us); font-weight: 400; }
+    .stage-table .china-note { color: var(--text-muted); font-size: 0.8rem; }
+    .stage-table td.col-min { min-width: 210px; }
+
+    .caveat-box {
+      margin-top: 1.25rem;
+      padding: 0.9rem 1.1rem;
+      background: rgba(226,85,46,0.08);
+      border: 1px solid rgba(226,85,46,0.25);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .caveat-box strong { color: var(--text); }
+
+    footer {
+      background: rgba(0,0,0,0.25);
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 2rem;
+      font-size: 0.8rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    footer a { color: var(--accent); }
+    footer strong { color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .stat-row { grid-template-columns: repeat(2, 1fr); }
+      .traj-chart { gap: 1rem; }
+      .traj-axis-labels { gap: 1rem; }
+    }
+    @media (max-width: 640px) {
+      .page-hero { padding: 2rem 1.25rem 1.75rem; }
+      .hero-inner h1 { font-size: 1.5rem; }
+      main { padding: 0 1.1rem; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .site-header { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="site-header">
+  <span><a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · Research &amp; Intelligence</span>
+  <nav>
+    <a href="index.html">Company Dashboard</a>
+    <a href="table.html">Volume &amp; Stage Table</a>
+  </nav>
+  <span>Last Updated: <strong style="color:white">July 2026</strong></span>
+</div>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <h1>U.S. vs. Allies vs. <span>China</span> — Global Magnet Production Context</h1>
+    <p class="hero-subtitle">
+      The 17 companies tracked in this dashboard are rebuilding a domestic magnet industry from a near-zero base.
+      This page places that buildout in global context: how much the U.S. and its allies produce today relative
+      to China, how that gap is projected to close through 2030, and how U.S. capacity is distributed across the
+      individual stages of the supply chain — mining, separation, alloying, and finished magnets.
+    </p>
+    <div class="hero-meta">
+      <span><span class="dot"></span> Figures sourced from company dossiers + comparative industry report</span>
+      <span>·</span>
+      <span>Data current through July 2026</span>
+      <span>·</span>
+      <span><a href="index.html">← Full company dashboard</a></span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ═══════════ HEADLINE STATS ═══════════ -->
+  <section class="block">
+    <h2>The Scale Gap, Today</h2>
+    <p class="block-sub">Finished rare earth permanent magnet output (NdFeB + SmCo + bonded), 2025.</p>
+    <div class="stat-row">
+      <div class="stat-tile china">
+        <div class="stat-label">China</div>
+        <div class="stat-value">~260,000+ <span style="font-size:1rem">mt/yr</span></div>
+        <div class="stat-note">~132,000 mt high-performance sintered NdFeB; 85–90% global share</div>
+      </div>
+      <div class="stat-tile allies">
+        <div class="stat-label">US Allies (Japan, EU, S. Korea, Australia)</div>
+        <div class="stat-value">10,000–14,000 <span style="font-size:1rem">mt/yr</span></div>
+        <div class="stat-note">~4–5% global share; Japan is the largest single bloc</div>
+      </div>
+      <div class="stat-tile us">
+        <div class="stat-label">United States</div>
+        <div class="stat-value">~3,600 <span style="font-size:1rem">mt/yr</span></div>
+        <div class="stat-note">&lt;2% global share; effectively zero as recently as 2020</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-label">China's Output Multiple</div>
+        <div class="stat-value">~14–17×</div>
+        <div class="stat-note">China vs. the U.S. and all its major allies combined</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SHARE BARS ═══════════ -->
+  <section class="block">
+    <h2>Global Market Share</h2>
+    <p class="block-sub">
+      A part-to-whole view of finished-magnet output. "Rest of World" covers producers outside the three
+      tracked blocs and is inferred as the residual against China's and the allied bloc's reported shares
+      (not separately itemized in the source report).
+    </p>
+
+    <div class="share-block">
+      <div class="share-label-row">
+        <span class="share-title">Today (2025–26 estimate)</span>
+        <span class="share-total">~14,000–18,000 mt/yr non-Chinese vs. ~260,000+ mt/yr China</span>
+      </div>
+      <div class="share-bar" role="img" aria-label="Global magnet market share: China approximately 87 percent, US and allies combined approximately 6.5 percent, rest of world approximately 6.5 percent">
+        <div class="share-seg seg-china" style="width:87%"><span class="seg-pct">China ~87%</span></div>
+        <div class="share-seg seg-us too-thin" style="width:1.4%"></div>
+        <div class="share-seg seg-allies too-thin" style="width:5.1%"></div>
+        <div class="share-seg seg-other too-thin" style="width:6.5%"></div>
+      </div>
+      <div class="legend-row">
+        <span class="legend-item"><span class="legend-swatch sw-china"></span> China ~87%</span>
+        <span class="legend-item"><span class="legend-swatch sw-us"></span> United States ~1–2%</span>
+        <span class="legend-item"><span class="legend-swatch sw-allies"></span> US Allies ~4–5%</span>
+        <span class="legend-item"><span class="legend-swatch sw-other"></span> Rest of world (residual, ~6–7%)</span>
+      </div>
+    </div>
+
+    <div class="share-block">
+      <div class="share-label-row">
+        <span class="share-title">2030 ceiling, if all announced projects execute on schedule</span>
+        <span class="share-total">~68,000–72,000 mt/yr non-Chinese vs. ~330,000+ mt/yr China</span>
+      </div>
+      <div class="share-bar" role="img" aria-label="Share of combined China plus US plus Allies output, 2030 ceiling: China approximately 82 percent, United States approximately 10 percent, US Allies approximately 8 percent">
+        <div class="share-seg seg-china" style="width:82%"><span class="seg-pct">China ~82%</span></div>
+        <div class="share-seg seg-us" style="width:10%"><span class="seg-pct">US ~10%</span></div>
+        <div class="share-seg seg-allies" style="width:8%"><span class="seg-pct">Allies ~8%</span></div>
+      </div>
+      <div class="legend-row">
+        <span class="legend-item"><span class="legend-swatch sw-china"></span> China ~82%</span>
+        <span class="legend-item"><span class="legend-swatch sw-us"></span> United States ~10%</span>
+        <span class="legend-item"><span class="legend-swatch sw-allies"></span> US Allies ~8%</span>
+      </div>
+      <p style="font-size:0.72rem; color:var(--text-dim); margin-top:0.6rem; font-style:italic;">
+        Shown as share of the combined China + US + Allies subtotal (the report does not size a separate "rest of
+        world" bucket for 2030) — not a claim about total global production. The report frames this same relationship
+        as "US + Allies ≈ 20–22% of China's 2030 output."
+      </p>
+    </div>
+
+    <div class="caveat-box">
+      <strong>Read this carefully:</strong> the 2030 figures are company-stated and government-projected targets,
+      not achieved production. Historical rare earth project execution rates suggest 30–50% timeline slippage is
+      common across this industry — the ~20% non-China milestone is achievable on paper but far from guaranteed.
+      Notably, if the U.S. buildout executes on schedule, it — not the allied bloc — becomes the larger non-Chinese
+      producer by 2030 (~40,000+ mt/yr vs. allies' ~28,000–32,000 mt/yr), a reversal from today.
+    </div>
+  </section>
+
+  <!-- ═══════════ TRAJECTORY ═══════════ -->
+  <section class="block">
+    <h2>The U.S. + Allied Buildout Race, 2026–2030</h2>
+    <p class="block-sub">
+      China's absolute scale (~270,000 → ~330,000+ mt/yr over this period) is off the chart below by roughly two
+      orders of magnitude — plotting it on the same axis would flatten the US/allied bars to invisible slivers.
+      This chart instead isolates the two catching-up blocs so their own growth trajectory is legible.
+    </p>
+    <div class="traj-wrap">
+      <div class="traj-chart" id="trajChart">
+        <!-- bars injected via inline data below for maintainability -->
+        <div class="traj-year-group">
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">3,600</div>
+            <div class="traj-bar bar-us" style="height:12px"></div>
+          </div>
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">10–14k</div>
+            <div class="traj-bar bar-allies" style="height:44px"></div>
+          </div>
+        </div>
+        <div class="traj-year-group">
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">7,000</div>
+            <div class="traj-bar bar-us" style="height:24px"></div>
+          </div>
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">14–20k</div>
+            <div class="traj-bar bar-allies" style="height:63px"></div>
+          </div>
+        </div>
+        <div class="traj-year-group">
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">15,000</div>
+            <div class="traj-bar bar-us" style="height:50px"></div>
+          </div>
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">18–25k</div>
+            <div class="traj-bar bar-allies" style="height:79px"></div>
+          </div>
+        </div>
+        <div class="traj-year-group">
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">40,000+</div>
+            <div class="traj-bar bar-us" style="height:132px"></div>
+          </div>
+          <div class="traj-bar-col" style="height:100%">
+            <div class="traj-bar-value">28–32k</div>
+            <div class="traj-bar bar-allies" style="height:104px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="traj-axis-labels">
+        <span class="traj-year-label">2026 (est.)</span>
+        <span class="traj-year-label">2027 (target)</span>
+        <span class="traj-year-label">2028 (target)</span>
+        <span class="traj-year-label">2030 (ceiling)</span>
+      </div>
+      <div class="legend-row" style="margin-top:1.1rem">
+        <span class="legend-item"><span class="legend-swatch sw-us"></span> United States (mt/yr)</span>
+        <span class="legend-item"><span class="legend-swatch sw-allies"></span> US Allies combined (mt/yr)</span>
+      </div>
+      <div class="traj-note">
+        For reference: China's own trajectory over the same period runs ~270,000 mt/yr (2026) → ~285,000 (2027) →
+        ~300,000 (2028) → ~330,000+ (2030 ceiling) — company-stated/projected figures, all outside this chart's scale.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ STAGE-BY-STAGE ═══════════ -->
+  <section class="block">
+    <h2>U.S. Capacity by Supply Chain Stage</h2>
+    <p class="block-sub">
+      The headline magnet-output numbers above are a downstream (finished-magnet) comparison. The table below
+      breaks the U.S. side down by pipeline stage, using each company's own disclosed current volumes where
+      available. China/global context is drawn from the comparative industry report and company dossiers where
+      a sourced figure exists; where it doesn't, the gap is stated plainly rather than estimated.
+    </p>
+    <div class="stage-table-wrap">
+      <table class="stage-table">
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>US Current Volume (disclosed)</th>
+            <th>China / Global Position</th>
+            <th>Key US Companies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">Mining &amp; Extraction</div>
+              <span class="stage-segment-tag seg-upstream">Upstream</span>
+            </td>
+            <td><span class="us-figure">50,692 MT</span> total rare earth oxide, 2025 (record, +12% YoY) — Mountain Pass, CA, the only active US REE mine</td>
+            <td class="china-note">China's mine output and export-quota system underpin its entire downstream chain. USA Rare Earth's Round Top, TX deposit is in development (no current output); no other US mine is commercial.</td>
+            <td>MP Materials</td>
+          </tr>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">Beneficiation / Hydrometallurgy</div>
+              <span class="stage-segment-tag seg-upstream">Upstream</span>
+            </td>
+            <td>Co-located with mining at Mountain Pass; volumes not separately disclosed. EMCO (Noblesville, IN) pre-processes e-waste into mixed RE powder — volumes undisclosed.</td>
+            <td class="china-note">No comparative Chinese figure in this dataset; qualitatively, China's beneficiation capacity scales with its mine output above.</td>
+            <td>MP Materials, American Resources / EMCO</td>
+          </tr>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">Separation &amp; REE Oxides</div>
+              <span class="stage-segment-tag seg-midstream">Midstream</span>
+            </td>
+            <td><span class="us-figure">917 MT</span> NdPr oxide, Q1 2026 record (MP, Mountain Pass) · <span class="us-figure">~500 MT/yr</span> NdPr oxide (Energy Fuels) + first US 99.9%-purity Dy and Tb oxide · ReElement, Momentum Technologies: pilot-scale, undisclosed volumes</td>
+            <td class="china-note">China's April 2025 Tier 1 export controls cover Sm, Gd, Tb, Dy, Lu, Sc, Y — the elements separated at this stage. Per the comparative report, no major operating HREE separation facility exists in the Western world outside Lynas' Malaysia plant; this is the most consequential single chokepoint in the entire non-Chinese chain.</td>
+            <td>MP Materials, Energy Fuels, ReElement, Momentum, Phoenix Tailings (metallization), Lynas (Hondo, TX — pre-production)</td>
+          </tr>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">Reduction &amp; Re-metal</div>
+              <span class="stage-segment-tag seg-midstream">Midstream</span>
+            </td>
+            <td><span class="us-figure">~200 MT/yr</span> RE metals — Phoenix Tailings, Exeter NH (Nd, Pr, Dy, Tb; America's only operating HREE metallization line) · MP Materials Independence facility (Fort Worth) — NdPr metal, volume not separately disclosed</td>
+            <td class="china-note">China dominates global metal reduction capacity; no US allied nation operates comparable HREE metallization at scale outside this dataset's coverage.</td>
+            <td>Phoenix Tailings, MP Materials</td>
+          </tr>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">Alloy &amp; Powder Manufacture</div>
+              <span class="stage-segment-tag seg-midstream">Midstream</span>
+            </td>
+            <td>Commercial but undisclosed volumes — USA Rare Earth / LCM (UK, strip-cast NdFeB alloy), Electron Energy Corp (SmCo alloy, capacity doubled 2025)</td>
+            <td class="china-note">Not covered by a sourced comparative figure in this dataset. USAR's LCM is UK-based; its "covered country" status under DFARS is unresolved as of July 2026.</td>
+            <td>USA Rare Earth (LCM), Electron Energy Corp.</td>
+          </tr>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">Magnet Manufacture</div>
+              <span class="stage-segment-tag seg-downstream">Downstream</span>
+            </td>
+            <td><span class="us-figure">~3,600 MT/yr</span> combined US current capacity — MP (~1,000), eVAC (2,000 target), Noveon (~2,000 ramping), USA Rare Earth (~600 Phase 1a); Arnold and Electron Energy commercial but undisclosed</td>
+            <td class="china-note"><strong>~260,000+ mt/yr</strong> (all types) / <strong>~132,000 mt/yr</strong> high-performance sintered NdFeB, 2025 — roughly <strong>70–260×</strong> current US downstream output depending on grade comparison. This is the stage with the most complete, directly comparable data (see Global Market Share above).</td>
+            <td>MP Materials, eVAC, Noveon, USA Rare Earth, Arnold, Electron Energy, Vulcan (pre-production), Niron (RE-free, pre-production), REalloys (pre-production)</td>
+          </tr>
+          <tr>
+            <td class="col-min">
+              <div class="stage-name">End-of-Life Recycling</div>
+              <span class="stage-segment-tag seg-upstream">Upstream (feedback loop)</span>
+            </td>
+            <td>Feeds into Noveon's ~2,000 MT/yr magnet output above (M2M® recycled feedstock); EMCO pre-processing volumes undisclosed</td>
+            <td class="china-note">Recycling is a structural advantage available to any producer regardless of mine access — the US's most China-independent pathway, though still small relative to primary-feedstock volumes industry-wide.</td>
+            <td>Noveon Magnetics, American Resources / EMCO</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div style="max-width:1200px; margin:0 auto;">
+    <p style="margin-bottom:0.75rem">
+      <strong>U.S. vs. Allies vs. China — Global Magnet Production Context</strong><br>
+      Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> ·
+      <a href="index.html">← Full Company Dashboard</a> · <a href="table.html">Volume &amp; Stage Table</a>
+    </p>
+    <p style="margin-bottom:0.75rem; font-size:0.75rem">
+      Global/China/allied figures sourced from "China vs. US Allies vs. United States: Rare Earth Magnet Production —
+      Three-Way Comparative Analysis" (Domestic Magnetic Production Project, June 2026), itself drawing on IEA,
+      Adamas Intelligence, The Metalnomist, CSIS, and company disclosures. U.S. company figures sourced from
+      individual company dossiers, current through July 2026.
+    </p>
+    <p style="font-size:0.72rem; color:var(--text-dim)">
+      This page is provided for research and informational purposes. Percentage splits and 2030 figures are
+      estimates and company-stated targets, not audited results. Nothing herein constitutes investment advice.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
