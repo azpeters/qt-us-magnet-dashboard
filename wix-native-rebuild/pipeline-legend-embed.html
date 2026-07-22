@@ -1,0 +1,251 @@
+<!--
+  WIX EMBED SETUP — Pipeline Diagram + Maturity Legend (decorative widget only)
+  1. On the Table page, Add → Embed → Custom Embeds → Embed a Widget → HTML
+     iframe → paste this entire file.
+  2. Position it above the native Repeater/Table you build per BUILD-GUIDE.md.
+  3. Height: no auto-resize in Wix's HTML iframe (same caveat as before).
+     Start around 260px on desktop, ~420px on mobile (content wraps taller
+     on narrow screens since .pipeline-flow scrolls horizontally but the
+     legend row wraps to more lines) — adjust after preview.
+  4. This widget is intentionally NOT part of the crawlable/native content —
+     it's purely decorative reference material (standard supply-chain
+     terminology, no unique citable facts), so it's fine to leave it as an
+     iframe rather than rebuilding it natively.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --bg: #053A5C;
+    --border: rgba(255,255,255,0.12);
+    --text-dim: rgba(255,255,255,0.38);
+    --text-muted: rgba(255,255,255,0.62);
+    --bg-card: rgba(255,255,255,0.06);
+    --font: "DIN Next LT Pro Light", "DIN Next LT Pro", "Avenir LT Pro 35 Light", Avenir, Helvetica, "Helvetica Neue", Arial, sans-serif;
+
+    --upstream: #5eadff;
+    --midstream: #fbbf24;
+    --downstream: #a0aec0;
+
+    --commercial: #34d399;
+    --commissioning: #60a5fa;
+    --pilot: #fbbf24;
+    --development: #fb923c;
+    --announced: #94a3b8;
+    --paused: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  /* ── PIPELINE DIAGRAM ── */
+  .pipeline-section {
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border);
+    padding: 1.75rem 2rem;
+  }
+  .pipeline-section h2 {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1.25rem;
+  }
+  .pipeline-inner { max-width: 1400px; margin: 0 auto; }
+  .pipeline-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .pipeline-segment { display: flex; flex-direction: column; gap: 0; }
+  .pipeline-segment-label {
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 3px 3px 0 0;
+    margin-bottom: 1px;
+    text-align: center;
+  }
+  .segment-upstream .pipeline-segment-label { background: rgba(94,173,255,0.2); color: var(--upstream); }
+  .segment-midstream .pipeline-segment-label { background: rgba(251,191,36,0.2); color: var(--midstream); }
+  .segment-downstream .pipeline-segment-label { background: rgba(160,174,192,0.15); color: var(--downstream); }
+  .pipeline-stages { display: flex; align-items: center; gap: 0; }
+  .pipeline-stage { display: flex; align-items: center; gap: 0; }
+  .stage-box {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    white-space: nowrap;
+    border: 1px solid;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .segment-upstream .stage-box { background: rgba(94,173,255,0.08); border-color: rgba(94,173,255,0.22); color: rgba(94,173,255,0.85); }
+  .segment-midstream .stage-box { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.22); color: rgba(251,191,36,0.85); }
+  .segment-downstream .stage-box { background: rgba(160,174,192,0.06); border-color: rgba(160,174,192,0.18); color: rgba(160,174,192,0.8); }
+  .pipeline-arrow { font-size: 0.9rem; color: var(--text-dim); padding: 0 0.15rem; flex-shrink: 0; }
+  .pipeline-divider { width: 2px; height: 42px; background: var(--border); margin: 0 0.5rem; flex-shrink: 0; }
+  .recycle-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin-top: 0.4rem;
+    padding-left: 1rem;
+    font-style: italic;
+  }
+
+  /* ── MATURITY LEGEND ── */
+  .legend-section {
+    max-width: 1400px;
+    margin: 1.25rem auto 0;
+    padding: 0 2rem 1.5rem;
+  }
+  .legend-inner {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1.25rem;
+  }
+  .legend-inner h3 {
+    font-size: 0.68rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+  .legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .pipeline-section, .legend-section { padding-left: 1rem; padding-right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Supply Chain Pipeline -->
+<section class="pipeline-section" aria-label="Supply chain pipeline overview">
+  <div class="pipeline-inner">
+    <h2>The Rare Earth Permanent Magnet Supply Chain</h2>
+    <div class="pipeline-flow" role="img" aria-label="Supply chain stages from upstream mining through downstream magnet manufacturing">
+      <div class="pipeline-segment segment-upstream">
+        <div class="pipeline-segment-label">Upstream</div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="stage-box">Mining &amp;<br>Extraction</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Benefici&shy;ation</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Hydro&shy;metallurgy</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">End-of-Life<br>Recycling</div>
+            <span class="pipeline-arrow">↘</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-divider"></div>
+
+      <div class="pipeline-segment segment-midstream">
+        <div class="pipeline-segment-label">Midstream</div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="stage-box">Separation</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">REE<br>Oxides</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Reduction</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Re-metal</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Alloy &amp; Powder<br>Manufacture</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline-divider"></div>
+
+      <div class="pipeline-segment segment-downstream">
+        <div class="pipeline-segment-label">Downstream</div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="stage-box">Magnet<br>Manufacture</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">Assembly<br>Manufacture</div>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="stage-box">End-Use<br>Products</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="recycle-badge">♻ End-of-Life Recycling re-enters the pipeline at Separation / Midstream, reducing dependence on primary mining.</div>
+  </div>
+</section>
+
+<!-- Maturity Legend -->
+<div class="legend-section">
+  <div class="legend-inner">
+    <h3>Stage Maturity</h3>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> Commercial — Operating at scale with revenue</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div> Commissioning — Facility built, in ramp phase</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div> Pilot / Demo — Small-scale operations underway</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fb923c"></div> Development — Under development; no commercial output</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#94a3b8"></div> Announced — Intent stated; no development underway</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div> Paused / Suspended — Operations halted</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
