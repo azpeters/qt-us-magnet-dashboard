@@ -1,3 +1,16 @@
+<!--
+  WIX EMBED SETUP — Volume & Stage Table (page 2 of 3)
+  1. In Wix Editor, create/open the page for this view, then:
+     Add → Embed → Custom Embeds → Embed a Widget → HTML iframe → paste this entire file.
+  2. Wix's HTML iframe does NOT auto-resize to content height. Set the widget's
+     height generously in the Wix Editor to avoid an inner scrollbar; adjust
+     after preview.
+  3. Before publishing, replace every "REPLACE-WITH-WIX-..." placeholder href
+     below with the actual published URLs of the Dashboard and Global Context pages.
+  4. Set this Wix page's own SEO title/description (Settings → SEO) using the
+     content in the <title> and meta description below — metadata inside this
+     iframe is not reliably crawled/indexed by Google as part of the Wix page.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -437,13 +450,32 @@
       .filter-section, .legend-section, .table-section { padding: 0 1rem; }
       .site-header { flex-direction: column; gap: 0.25rem; text-align: center; }
     }
+
+    @media print {
+      body { background: white; color: black; }
+      .filter-section { display: none; }
+      .site-watermark { position: fixed; color: #999 !important; opacity: 1 !important; }
+    }
+
+    .site-watermark {
+      position: fixed;
+      bottom: 10px;
+      right: 14px;
+      font-size: 0.65rem;
+      letter-spacing: 0.02em;
+      color: var(--text-dim);
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 999;
+      font-family: var(--font);
+    }
   </style>
 </head>
 <body>
 
 <div class="site-header">
-  <span><a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · Research &amp; Intelligence</span>
-  <span><a href="index.html">Full Company Dashboard</a> · <a href="global-context.html">US vs. China vs. Allies →</a></span>
+  <span>Volume &amp; Stage Table</span>
+  <span><a href="REPLACE-WITH-WIX-DASHBOARD-URL">Full Company Dashboard</a> · <a href="REPLACE-WITH-WIX-GLOBAL-CONTEXT-URL">US vs. China vs. Allies →</a></span>
   <span>Last Updated: <strong style="color:white">July 2026</strong></span>
 </div>
 
@@ -1086,8 +1118,7 @@
   <div style="max-width:1400px; margin:0 auto;">
     <p style="margin-bottom:0.75rem">
       <strong>U.S. Rare Earth Magnet Supply Chain — Volume &amp; Stage Table</strong><br>
-      Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> ·
-      <a href="index.html">← View Full Company Dashboard</a>
+      <a href="REPLACE-WITH-WIX-DASHBOARD-URL">← View Full Company Dashboard</a>
     </p>
     <p style="margin-bottom:0.75rem; font-size:0.75rem">
       Data current through July 2026 · 17 companies tracked · All volume figures are approximate and sourced from company disclosures
@@ -1095,8 +1126,13 @@
     <p style="font-size:0.72rem; color:var(--text-dim)">
       This dashboard is provided for research and informational purposes. Nothing herein constitutes investment advice.
     </p>
+    <p style="font-size:0.72rem; color:var(--text-dim); margin-top:0.5rem">
+      © 2026 QT Magnetic Solutions. All rights reserved. Data may not be reproduced or redistributed without written permission.
+    </p>
   </div>
 </footer>
+
+<div class="site-watermark" aria-hidden="true">qtmagneticsolutions.com</div>
 
 <script>
   let segmentFilter = 'all';

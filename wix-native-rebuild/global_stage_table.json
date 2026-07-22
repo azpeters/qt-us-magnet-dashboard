@@ -1,0 +1,44 @@
+[
+  {
+    "stage": "Mining & Extraction Upstream",
+    "us_current_volume": "50,692 MT total rare earth oxide, 2025 (record, +12% YoY) \u2014 Mountain Pass, CA, the only active US REE mine",
+    "china_global_position": "China's mine output and export-quota system underpin its entire downstream chain. USA Rare Earth's Round Top, TX deposit is in development (no current output); no other US mine is commercial.",
+    "key_us_companies": "MP Materials"
+  },
+  {
+    "stage": "Beneficiation / Hydrometallurgy Upstream",
+    "us_current_volume": "Co-located with mining at Mountain Pass; volumes not separately disclosed. EMCO (Noblesville, IN) pre-processes e-waste into mixed RE powder \u2014 volumes undisclosed.",
+    "china_global_position": "No comparative Chinese figure in this dataset; qualitatively, China's beneficiation capacity scales with its mine output above.",
+    "key_us_companies": "MP Materials, American Resources / EMCO"
+  },
+  {
+    "stage": "Separation & REE Oxides Midstream",
+    "us_current_volume": "917 MT NdPr oxide, Q1 2026 record (MP, Mountain Pass) \u00b7 ~500 MT/yr NdPr oxide (Energy Fuels) + first US 99.9%-purity Dy and Tb oxide \u00b7 ReElement, Momentum Technologies: pilot-scale, undisclosed volumes",
+    "china_global_position": "China's April 2025 Tier 1 export controls cover Sm, Gd, Tb, Dy, Lu, Sc, Y \u2014 the elements separated at this stage. Per the comparative report, no major operating HREE separation facility exists in the Western world outside Lynas' Malaysia plant; this is the most consequential single chokepoint in the entire non-Chinese chain.",
+    "key_us_companies": "MP Materials, Energy Fuels, ReElement, Momentum, Phoenix Tailings (metallization), Lynas (Hondo, TX \u2014 pre-production)"
+  },
+  {
+    "stage": "Reduction & Re-metal Midstream",
+    "us_current_volume": "~200 MT/yr RE metals \u2014 Phoenix Tailings, Exeter NH (Nd, Pr, Dy, Tb; America's only operating HREE metallization line) \u00b7 MP Materials Independence facility (Fort Worth) \u2014 NdPr metal, volume not separately disclosed",
+    "china_global_position": "China dominates global metal reduction capacity; no US allied nation operates comparable HREE metallization at scale outside this dataset's coverage.",
+    "key_us_companies": "Phoenix Tailings, MP Materials"
+  },
+  {
+    "stage": "Alloy & Powder Manufacture Midstream",
+    "us_current_volume": "Commercial but undisclosed volumes \u2014 USA Rare Earth / LCM (UK, strip-cast NdFeB alloy), Electron Energy Corp (SmCo alloy, capacity doubled 2025)",
+    "china_global_position": "Not covered by a sourced comparative figure in this dataset. USAR's LCM is UK-based; its \"covered country\" status under DFARS is unresolved as of July 2026.",
+    "key_us_companies": "USA Rare Earth (LCM), Electron Energy Corp."
+  },
+  {
+    "stage": "Magnet Manufacture Downstream",
+    "us_current_volume": "~3,600 MT/yr combined US current capacity \u2014 MP (~1,000), eVAC (2,000 target), Noveon (~2,000 ramping), USA Rare Earth (~600 Phase 1a); Arnold and Electron Energy commercial but undisclosed",
+    "china_global_position": "~260,000+ mt/yr (all types) / ~132,000 mt/yr high-performance sintered NdFeB, 2025 \u2014 roughly 70\u2013260\u00d7 current US downstream output depending on grade comparison. This is the stage with the most complete, directly comparable data (see Global Market Share above).",
+    "key_us_companies": "MP Materials, eVAC, Noveon, USA Rare Earth, Arnold, Electron Energy, Vulcan (pre-production), Niron (RE-free, pre-production), REalloys (pre-production)"
+  },
+  {
+    "stage": "End-of-Life Recycling Upstream (feedback loop)",
+    "us_current_volume": "Feeds into Noveon's ~2,000 MT/yr magnet output above (M2M\u00ae recycled feedstock); EMCO pre-processing volumes undisclosed",
+    "china_global_position": "Recycling is a structural advantage available to any producer regardless of mine access \u2014 the US's most China-independent pathway, though still small relative to primary-feedstock volumes industry-wide.",
+    "key_us_companies": "Noveon Magnetics, American Resources / EMCO"
+  }
+]

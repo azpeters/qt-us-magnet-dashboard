@@ -1,3 +1,16 @@
+<!--
+  WIX EMBED SETUP — Company Dashboard (page 1 of 3)
+  1. In Wix Editor, create/open the page for this view, then:
+     Add → Embed → Custom Embeds → Embed a Widget → HTML iframe → paste this entire file.
+  2. Wix's HTML iframe does NOT auto-resize to content height. Set the widget's
+     height generously in the Wix Editor (this page is long — try 6000-7000px as
+     a starting point) to avoid an inner scrollbar. Adjust after preview.
+  3. Before publishing, replace every "REPLACE-WITH-WIX-..." placeholder href
+     below with the actual published URLs of the Table and Global Context pages.
+  4. Set this Wix page's own SEO title/description (Settings → SEO) using the
+     content in the <title> and meta description below — metadata inside this
+     iframe is not reliably crawled/indexed by Google as part of the Wix page.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +52,12 @@
     "temporalCoverage": "2026",
     "spatialCoverage": "United States",
     "keywords": ["rare earth magnets", "NdFeB", "neodymium magnets", "rare earth supply chain", "domestic manufacturing", "critical minerals", "DFARS compliance", "DoD supply chain"],
-    "license": "https://creativecommons.org/licenses/by/4.0/"
+    "copyrightNotice": "© 2026 QT Magnetic Solutions. All rights reserved.",
+    "copyrightHolder": {
+      "@type": "Organization",
+      "name": "QT Magnetic Solutions",
+      "url": "https://qtmagneticsolutions.com"
+    }
   }
   </script>
 
@@ -633,6 +651,20 @@
       .filter-section, .expand-btn { display: none; }
       .card-detail { display: block !important; }
       .company-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .site-watermark { position: fixed; color: #999 !important; opacity: 1 !important; }
+    }
+
+    .site-watermark {
+      position: fixed;
+      bottom: 10px;
+      right: 14px;
+      font-size: 0.65rem;
+      letter-spacing: 0.02em;
+      color: var(--text-dim);
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 999;
+      font-family: var(--font);
     }
   </style>
 </head>
@@ -640,8 +672,8 @@
 
 <!-- Site Header -->
 <div class="site-header">
-  <span><a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · Research &amp; Intelligence</span>
-  <span><a href="table.html">Volume &amp; Stage Table</a> · <a href="global-context.html">US vs. China vs. Allies →</a></span>
+  <span>Rare Earth Magnet Production Dashboard</span>
+  <span><a href="REPLACE-WITH-WIX-TABLE-URL">Volume &amp; Stage Table</a> · <a href="REPLACE-WITH-WIX-GLOBAL-CONTEXT-URL">US vs. China vs. Allies →</a></span>
   <span>Last Updated: <strong style="color:white">July 2026</strong> · 17 Companies Tracked</span>
 </div>
 
@@ -1777,8 +1809,7 @@
 <footer>
   <div style="max-width:1200px; margin:0 auto;">
     <p style="margin-bottom:0.75rem">
-      <strong>U.S. Domestic Rare Earth Magnet Production Dashboard</strong><br>
-      Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · qtmagneticsolutions.com
+      <strong>U.S. Domestic Rare Earth Magnet Production Dashboard</strong>
     </p>
     <p style="margin-bottom:0.75rem; font-size:0.75rem">
       Data current through July 2026 · 17 companies tracked · Sources: SEC filings, DoD contracts, company press releases, trade publications
@@ -1787,8 +1818,13 @@
       This dashboard is provided for research and informational purposes. Nothing herein constitutes investment advice.
       All company names, trademarks, and ticker symbols are property of their respective owners.
     </p>
+    <p style="font-size:0.72rem; color:var(--text-dim); margin-top:0.5rem">
+      © 2026 QT Magnetic Solutions. All rights reserved. Data may not be reproduced or redistributed without written permission.
+    </p>
   </div>
 </footer>
+
+<div class="site-watermark" aria-hidden="true">qtmagneticsolutions.com</div>
 
 <script>
   // Filter state

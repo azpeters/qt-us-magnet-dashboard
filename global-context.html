@@ -1,3 +1,16 @@
+<!--
+  WIX EMBED SETUP — US vs. China vs. Allies (page 3 of 3)
+  1. In Wix Editor, create/open the page for this view, then:
+     Add → Embed → Custom Embeds → Embed a Widget → HTML iframe → paste this entire file.
+  2. Wix's HTML iframe does NOT auto-resize to content height. Set the widget's
+     height generously in the Wix Editor to avoid an inner scrollbar; adjust
+     after preview.
+  3. Before publishing, replace every "REPLACE-WITH-WIX-..." placeholder href
+     below with the actual published URLs of the Dashboard and Table pages.
+  4. Set this Wix page's own SEO title/description (Settings → SEO) using the
+     content in the <title> and meta description below — metadata inside this
+     iframe is not reliably crawled/indexed by Google as part of the Wix page.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -318,15 +331,33 @@
       .stat-row { grid-template-columns: 1fr 1fr; }
       .site-header { flex-direction: column; text-align: center; }
     }
+
+    @media print {
+      body { background: white; color: black; }
+      .site-watermark { position: fixed; color: #999 !important; opacity: 1 !important; }
+    }
+
+    .site-watermark {
+      position: fixed;
+      bottom: 10px;
+      right: 14px;
+      font-size: 0.65rem;
+      letter-spacing: 0.02em;
+      color: var(--text-dim);
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 999;
+      font-family: var(--font);
+    }
   </style>
 </head>
 <body>
 
 <div class="site-header">
-  <span><a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · Research &amp; Intelligence</span>
+  <span>US vs. China vs. Allies</span>
   <nav>
-    <a href="index.html">Company Dashboard</a>
-    <a href="table.html">Volume &amp; Stage Table</a>
+    <a href="REPLACE-WITH-WIX-DASHBOARD-URL">Company Dashboard</a>
+    <a href="REPLACE-WITH-WIX-TABLE-URL">Volume &amp; Stage Table</a>
   </nav>
   <span>Last Updated: <strong style="color:white">July 2026</strong></span>
 </div>
@@ -602,8 +633,7 @@
   <div style="max-width:1200px; margin:0 auto;">
     <p style="margin-bottom:0.75rem">
       <strong>U.S. vs. Allies vs. China — Global Magnet Production Context</strong><br>
-      Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> ·
-      <a href="index.html">← Full Company Dashboard</a> · <a href="table.html">Volume &amp; Stage Table</a>
+      <a href="REPLACE-WITH-WIX-DASHBOARD-URL">← Full Company Dashboard</a> · <a href="REPLACE-WITH-WIX-TABLE-URL">Volume &amp; Stage Table</a>
     </p>
     <p style="margin-bottom:0.75rem; font-size:0.75rem">
       Global/China/allied figures sourced from "China vs. US Allies vs. United States: Rare Earth Magnet Production —
@@ -615,8 +645,13 @@
       This page is provided for research and informational purposes. Percentage splits and 2030 figures are
       estimates and company-stated targets, not audited results. Nothing herein constitutes investment advice.
     </p>
+    <p style="font-size:0.72rem; color:var(--text-dim); margin-top:0.5rem">
+      © 2026 QT Magnetic Solutions. All rights reserved. Data may not be reproduced or redistributed without written permission.
+    </p>
   </div>
 </footer>
+
+<div class="site-watermark" aria-hidden="true">qtmagneticsolutions.com</div>
 
 </body>
 </html>
