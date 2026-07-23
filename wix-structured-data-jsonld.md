@@ -1,3 +1,9 @@
+> **SUPERSEDED (2026-07-23):** the dashboard is now hosted externally at
+> dashboard.qtmagneticsolutions.com instead of embedded in Wix pages. The
+> JSON-LD blocks below are already baked directly into index.html and
+> global-context.html's `<head>` — no Wix Structured Data panel needed.
+> Kept for reference only.
+
 # JSON-LD Structured Data — Wix Setup
 
 ## Where it goes in Wix

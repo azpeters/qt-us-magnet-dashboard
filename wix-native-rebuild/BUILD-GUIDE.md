@@ -1,3 +1,9 @@
+> **SUPERSEDED (2026-07-23):** the dashboard is now hosted externally at
+> dashboard.qtmagneticsolutions.com (GitHub Pages) instead of being rebuilt
+> inside Wix. That solves the same crawlability goal this guide was written
+> for, without the Velo/CMS rebuild effort below. Kept for reference only —
+> not the current plan.
+
 # Native Wix Rebuild — Build Guide
 
 Goal: the dashboard's content lives in real, crawlable Wix page HTML (wrapped in
