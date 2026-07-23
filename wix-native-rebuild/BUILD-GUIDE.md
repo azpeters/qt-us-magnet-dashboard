@@ -87,12 +87,18 @@ it's only 4 rows).
 
 1. Same `MagnetCompanies` collection, new Dataset instance on this page
    (Wix lets you reuse one collection across multiple page datasets).
-2. Use a **Table** element if your Wix plan/Editor version has one, or a
-   Repeater styled as table rows (columns: Company, Segment, Maturity,
-   Key Stages, Current Volume, Projected Volume, Target Year).
-3. Column-header sorting: bind header click to `wixData` sort calls on
-   `currentVolumeSort` / `projectedVolumeSort` (numeric) or the text fields
-   (alphabetical) — starter code below.
+2. **Use a Repeater, not Wix's native Table element.** The native Table
+   element's column headers aren't individually selectable — you can't give
+   them element IDs, and Wix doesn't support click-to-sort-by-header on it
+   natively (it's an open feature request, not shipped). Build a Repeater for
+   the data rows (columns: Company, Segment, Maturity, Key Stages, Current
+   Volume, Projected Volume, Target Year), and a **separate, manually-built
+   header row above it** using individual text/button elements — one per
+   column. Those are ordinary elements with normal ID fields, unlike the
+   native Table's headers.
+3. Column-header sorting: bind each header element's click to a `wixData`
+   sort call on `currentVolumeSort` / `projectedVolumeSort` (numeric) or the
+   text fields (alphabetical) — starter code below.
 
 ### Page 3 — US vs. China vs. Allies
 
