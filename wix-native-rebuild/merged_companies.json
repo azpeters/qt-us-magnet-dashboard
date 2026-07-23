@@ -23,7 +23,8 @@
     "projectedVolumeNote": "10,000 MT/yr Northlake plant broke ground 2026; commissioning slated to begin 2028",
     "targetYear": "2028+",
     "currentVolumeSort": "1000",
-    "projectedVolumeSort": "11000"
+    "projectedVolumeSort": "11000",
+    "maturityColor": "#34d399"
   },
   {
     "name": "USA Rare Earth, Inc.",
@@ -49,7 +50,8 @@
     "projectedVolumeNote": "3,600 MT/yr Stillwater + 6,400 MT/yr new Cherokee Co./Blacksburg, SC site (selected June 2, 2026)",
     "targetYear": "2028+",
     "currentVolumeSort": "600",
-    "projectedVolumeSort": "10000"
+    "projectedVolumeSort": "10000",
+    "maturityColor": "#34d399"
   },
   {
     "name": "eVAC Magnetics LLC",
@@ -75,7 +77,8 @@
     "projectedVolumeNote": "$500M+ total investment; $111.9M QAEP tax credit; parent VAC subject to pending acquisition by Energy Fuels (announced Jun 23, 2026; close early 2027)",
     "targetYear": "2029",
     "currentVolumeSort": "2000",
-    "projectedVolumeSort": "12000"
+    "projectedVolumeSort": "12000",
+    "maturityColor": "#60a5fa"
   },
   {
     "name": "Noveon Magnetics, Inc.",
@@ -101,7 +104,8 @@
     "projectedVolumeNote": "San Marcos facility designed capacity; $215M Series C Jan 2026",
     "targetYear": "2028+",
     "currentVolumeSort": "2000",
-    "projectedVolumeSort": "10000"
+    "projectedVolumeSort": "10000",
+    "maturityColor": "#34d399"
   },
   {
     "name": "Energy Fuels Inc.",
@@ -127,7 +131,8 @@
     "projectedVolumeNote": "Phase 1 from ~10,000 MT/yr monazite input; pending acquisition of VAC/eVAC (announced Jun 23, 2026) would add 12,000 MT/yr downstream magnet capacity",
     "targetYear": "2027",
     "currentVolumeSort": "500",
-    "projectedVolumeSort": "1000"
+    "projectedVolumeSort": "1000",
+    "maturityColor": "#34d399"
   },
   {
     "name": "Vulcan Elements, Inc.",
@@ -153,7 +158,8 @@
     "projectedVolumeNote": "$620M DoD OSC loan (reportedly on track, July 2026); $1.4B ReElement supply agreement",
     "targetYear": "2030+4\u20136 yrs post-finance",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "10000"
+    "projectedVolumeSort": "10000",
+    "maturityColor": "#fb923c"
   },
   {
     "name": "ReElement Technologies Corp.",
@@ -179,7 +185,8 @@
     "projectedVolumeNote": "Marion, IN 400,000 sq ft expansion; $1.4B Vulcan supply agreement; $80M DoD OSC loan dropped by ReElement July 2026 (never disbursed) in favor of equity financing",
     "targetYear": "2026+",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "0"
+    "projectedVolumeSort": "0",
+    "maturityColor": "#fbbf24"
   },
   {
     "name": "Arnold Magnetic Technologies",
@@ -205,7 +212,8 @@
     "projectedVolumeNote": "USAR/LCM ex-China alloy supply agreement Mar 2026",
     "targetYear": "2027DFARS deadline",
     "currentVolumeSort": "999",
-    "projectedVolumeSort": "999"
+    "projectedVolumeSort": "999",
+    "maturityColor": "#34d399"
   },
   {
     "name": "Electron Energy Corporation",
@@ -231,7 +239,8 @@
     "projectedVolumeNote": "NdFeB DFARS compliance targeted mid-2026",
     "targetYear": "2026NdFeB DFARS",
     "currentVolumeSort": "998",
-    "projectedVolumeSort": "998"
+    "projectedVolumeSort": "998",
+    "maturityColor": "#34d399"
   },
   {
     "name": "Phoenix Tailings, Inc.",
@@ -257,7 +266,8 @@
     "projectedVolumeNote": "Stated as sufficient for entire US defense RE metals need",
     "targetYear": "2026\u201327",
     "currentVolumeSort": "200",
-    "projectedVolumeSort": "1000"
+    "projectedVolumeSort": "1000",
+    "maturityColor": "#fbbf24"
   },
   {
     "name": "Lynas Rare Earths \u2014 US Operations",
@@ -283,7 +293,8 @@
     "projectedVolumeNote": "\u26a0 Seadrift (2,500\u20133,000 MT/yr HREE) still \"unlikely to proceed\" (Jul 2026); near-term DoD offtake instead covered by Mar 2026 ~$96M global-supply LOI",
     "targetYear": "2026Hondo only",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "5000"
+    "projectedVolumeSort": "5000",
+    "maturityColor": "#f87171"
   },
   {
     "name": "Niron Magnetics, Inc. \u26a0\ufe0f RE-Free",
@@ -309,7 +320,8 @@
     "projectedVolumeNote": "Second 10,000 MT/yr plant in site selection ($1.8B est.)",
     "targetYear": "2027 / 2030+",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "1500"
+    "projectedVolumeSort": "1500",
+    "maturityColor": "#fb923c"
   },
   {
     "name": "American Resources Corp. / Electrified Materials",
@@ -335,7 +347,8 @@
     "projectedVolumeNote": "Expanded pre-processing capacity Mar 2026; volumes not disclosed",
     "targetYear": "2026+",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "0"
+    "projectedVolumeSort": "0",
+    "maturityColor": "#fbbf24"
   },
   {
     "name": "US Strategic Metals, LLC",
@@ -361,7 +374,8 @@
     "projectedVolumeNote": "NdPr, Dy, Tb oxides from recycled feedstock via Ionic tech",
     "targetYear": "TBD",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "0"
+    "projectedVolumeSort": "0",
+    "maturityColor": "#94a3b8"
   },
   {
     "name": "Momentum Technologies, Inc.",
@@ -387,7 +401,8 @@
     "projectedVolumeNote": "+2 additional plants planned 2027 (one REE, one battery)",
     "targetYear": "2026\u201327",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "0"
+    "projectedVolumeSort": "0",
+    "maturityColor": "#fbbf24"
   },
   {
     "name": "REalloys, Inc.",
@@ -413,7 +428,8 @@
     "projectedVolumeNote": "Japanese technology transfer; production target 2027 (compressed)",
     "targetYear": "2027Timeline optimistic",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "10000"
+    "projectedVolumeSort": "10000",
+    "maturityColor": "#fb923c"
   },
   {
     "name": "Advanced Magnet Lab, Inc. (AML)",
@@ -439,6 +455,7 @@
     "projectedVolumeNote": "Qualification phase; scale-up follows DLA contract completion",
     "targetYear": "2027+",
     "currentVolumeSort": "0",
-    "projectedVolumeSort": "0"
+    "projectedVolumeSort": "0",
+    "maturityColor": "#fbbf24"
   }
 ]

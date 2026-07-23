@@ -54,6 +54,7 @@ but set types explicitly where noted):
 | `targetYear` | Text | Target year, Table view |
 | `currentVolumeSort` | **Number** | Numeric current volume for sorting the Table view |
 | `projectedVolumeSort` | **Number** | Numeric projected volume for sorting |
+| `maturityColor` | **Color** | Pre-computed hex for the maturity badge — see §4b, this one's no-code |
 
 ### Collection: `SupplyChainStages`
 
@@ -233,36 +234,56 @@ $w.onReady(function () {
 
 ## 4b. Badge/tag styling inside a Repeater
 
-Wix has no conditional-class binding like HTML, so dynamic per-item badge
-colors don't work by binding alone. Reliable pattern: pre-build one badge
-element per possible value (already colored per §5's tokens in the Editor),
-then show/hide the right one(s) per item in `onItemReady`:
+Two different problems here, two different solutions — don't apply the same
+approach to both.
+
+### Maturity badge — no code needed
+
+Maturity is a single value per company, so this doesn't need multiple
+elements or Velo at all. `merged_companies.csv` now includes a
+**`maturityColor`** column — one hex value per company, already computed
+(paused > announced > most-advanced-of commercial/commissioning/pilot/
+development, matching how the original design prioritized what to surface).
+Import it as a **Color** field type (not Text) into `MagnetCompanies`.
+
+Then in the Editor, with just one badge element (a Box with a Text on top,
+same pill styling as before):
+1. Select the badge's Box, click the small **Connect** icon that appears
+   when a Dataset is on the page.
+2. In the connect panel, find the background/fill color property and map it
+   to the `maturityColor` field.
+3. Select the Text on top, connect it to `tableMaturityLabel`.
+
+That's the whole thing — no `onItemReady`, no duplicated elements. Every
+row's badge recolors and relabels itself automatically as the dataset
+scrolls through items.
+
+(Worth knowing why this can't extend further: Wix's no-code data binding
+does support Color fields this way, but does **not** support conditional
+show/hide of an element based on a field value — that's a confirmed, still-
+open feature request. So this shortcut works for *recoloring* a badge, but
+not for *hiding* one, which is exactly the segment problem below.)
+
+### Segment badges — still needs the toggle code
+
+A company can be Upstream **and** Midstream **and** Downstream at once, so
+there's no single value to bind a color to — this is really a "how many
+badges show" problem, not a coloring problem, and that specifically requires
+code (see the no-code limitation above). Pre-build the 3 badges as before
+(already colored per §5's tokens in the Editor, no Color field needed since
+each one's color is constant, not data-driven), then toggle visibility:
 
 ```js
 $w('#companyRepeater').onItemReady(($item, itemData) => {
-  // Segments — multi-select, a company can be all three at once
   const segs = itemData.dataSegments || '';
   $item('#badgeUpstream').collapsed = !segs.includes('upstream');
   $item('#badgeMidstream').collapsed = !segs.includes('midstream');
   $item('#badgeDownstream').collapsed = !segs.includes('downstream');
-
-  // Maturity — same pattern, one badge per possible state
-  const mat = itemData.dataMaturity || '';
-  $item('#badgeCommercial').collapsed = !mat.includes('commercial');
-  $item('#badgeCommissioning').collapsed = !mat.includes('commissioning');
-  $item('#badgePilot').collapsed = !mat.includes('pilot');
-  $item('#badgeDevelopment').collapsed = !mat.includes('development');
-  $item('#badgeAnnounced').collapsed = !mat.includes('announced');
-  $item('#badgePaused').collapsed = !mat.includes('paused');
 });
 ```
 
-There's also a `$w('#el').style.backgroundColor = '...'` API for recoloring a
-single shared badge at runtime, but it has reported inconsistency inside
-repeater items specifically — the duplicate-and-toggle approach above is
-more elements to build once, but always renders correctly. Pill shape
-(corner radius) is a one-time Editor design-panel setting per badge, not
-something to script.
+Pill shape (corner radius) is a one-time Editor design-panel setting per
+badge either way, not something to script.
 
 ## 5. Design tokens (match current look)
 
