@@ -106,9 +106,22 @@ it's only 4 rows).
 
 ## 4. Starter Velo code
 
-Add this in the page's code panel (`onReady`). Element IDs (`#segmentFilter`,
-`#companyRepeater`, etc.) are placeholders — rename to match whatever you name
-your actual elements in the Editor.
+**Finding / setting an element ID:** click the element on the canvas in the
+Wix Editor. In the Properties panel there's a small editable ID field near
+the top (Wix defaults it to something like `text1` or `header1`) — click it
+and rename it to something identifiable, e.g. `companyHeader`. That exact
+string (case-sensitive) is what goes inside `$w('#...')` in the code below —
+it's the element's ID field, not its visible button/label text.
+
+**Where this code goes:** open the page's code panel (bottom of the Wix
+Editor, `</>` icon) — each page has its own code file. Every line that
+references `$w('#...')` must be inside the `$w.onReady(() => { ... })` block,
+not floating outside it — code outside `onReady` runs before the page's
+elements are attached and will silently fail or error. Element IDs
+(`#segmentFilter`, `#companyRepeater`, etc.) below are placeholders — rename
+to match whatever you actually named your elements per the step above.
+
+This applies to Page 1 (Company Dashboard):
 
 ```js
 import wixData from 'wix-data';
@@ -160,34 +173,44 @@ function updateCount() {
 }
 ```
 
-**Expand/collapse detail section inside each repeater item:**
+**Expand/collapse detail section inside each repeater item** (add inside the
+same `$w.onReady()` block as the filter code above, on Page 1):
 
 ```js
-$w('#companyRepeater').onItemReady(($item, itemData) => {
-  $item('#expandBtn').onClick(() => {
-    const detail = $item('#detailSection');
-    if (detail.collapsed) {
-      detail.expand();
-      $item('#expandBtn').label = 'Details ▴';
-    } else {
-      detail.collapse();
-      $item('#expandBtn').label = 'Details ▾';
-    }
-  });
+$w.onReady(function () {
+  // ...filter code from above also lives in here...
 
-  // Parse the JSON-blob field for Government Relationships / Commercial Agreements style sections
-  const sections = JSON.parse(itemData.detailSectionsJson || '[]');
-  // Render into a rich-text or repeater element inside the item as needed
+  $w('#companyRepeater').onItemReady(($item, itemData) => {
+    $item('#expandBtn').onClick(() => {
+      const detail = $item('#detailSection');
+      if (detail.collapsed) {
+        detail.expand();
+        $item('#expandBtn').label = 'Details ▴';
+      } else {
+        detail.collapse();
+        $item('#expandBtn').label = 'Details ▾';
+      }
+    });
+
+    // Parse the JSON-blob field for Government Relationships / Commercial Agreements style sections
+    const sections = JSON.parse(itemData.detailSectionsJson || '[]');
+    // Render into a rich-text or repeater element inside the item as needed
+  });
 });
 ```
 
-**Column sort on the Table page:**
+**Column sort — Page 2 (Volume & Stage Table), separate page, separate code
+file.** This is the full file for that page — `sortBy` can sit outside
+`onReady` since it's just a function definition with no `$w` calls in its own
+body until invoked, but the `.onClick()` bindings that call it must be inside:
 
 ```js
+import wixData from 'wix-data';
+
 let sortCol = 'name';
 let sortDir = 'asc';
 
-function sortBy(field, numeric) {
+function sortBy(field) {
   sortDir = (sortCol === field && sortDir === 'asc') ? 'desc' : 'asc';
   sortCol = field;
   let sort = wixData.sort();
@@ -195,9 +218,11 @@ function sortBy(field, numeric) {
   $w('#tableDataset').setSort(sort);
 }
 
-$w('#currentVolumeHeader').onClick(() => sortBy('currentVolumeSort', true));
-$w('#projectedVolumeHeader').onClick(() => sortBy('projectedVolumeSort', true));
-$w('#companyHeader').onClick(() => sortBy('name', false));
+$w.onReady(function () {
+  $w('#currentVolumeHeader').onClick(() => sortBy('currentVolumeSort'));
+  $w('#projectedVolumeHeader').onClick(() => sortBy('projectedVolumeSort'));
+  $w('#companyHeader').onClick(() => sortBy('name'));
+});
 ```
 
 ## 5. Design tokens (match current look)
