@@ -231,6 +231,39 @@ $w.onReady(function () {
 });
 ```
 
+## 4b. Badge/tag styling inside a Repeater
+
+Wix has no conditional-class binding like HTML, so dynamic per-item badge
+colors don't work by binding alone. Reliable pattern: pre-build one badge
+element per possible value (already colored per §5's tokens in the Editor),
+then show/hide the right one(s) per item in `onItemReady`:
+
+```js
+$w('#companyRepeater').onItemReady(($item, itemData) => {
+  // Segments — multi-select, a company can be all three at once
+  const segs = itemData.dataSegments || '';
+  $item('#badgeUpstream').collapsed = !segs.includes('upstream');
+  $item('#badgeMidstream').collapsed = !segs.includes('midstream');
+  $item('#badgeDownstream').collapsed = !segs.includes('downstream');
+
+  // Maturity — same pattern, one badge per possible state
+  const mat = itemData.dataMaturity || '';
+  $item('#badgeCommercial').collapsed = !mat.includes('commercial');
+  $item('#badgeCommissioning').collapsed = !mat.includes('commissioning');
+  $item('#badgePilot').collapsed = !mat.includes('pilot');
+  $item('#badgeDevelopment').collapsed = !mat.includes('development');
+  $item('#badgeAnnounced').collapsed = !mat.includes('announced');
+  $item('#badgePaused').collapsed = !mat.includes('paused');
+});
+```
+
+There's also a `$w('#el').style.backgroundColor = '...'` API for recoloring a
+single shared badge at runtime, but it has reported inconsistency inside
+repeater items specifically — the duplicate-and-toggle approach above is
+more elements to build once, but always renders correctly. Pill shape
+(corner radius) is a one-time Editor design-panel setting per badge, not
+something to script.
+
 ## 5. Design tokens (match current look)
 
 Apply these in the Wix Design panel per element — there's no shared stylesheet
