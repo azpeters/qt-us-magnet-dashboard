@@ -96,7 +96,26 @@
       gap: 0.4rem;
     }
     .site-header a { color: var(--accent); }
-    .site-header nav { display: flex; gap: 1rem; }
+    .site-header nav { display: flex; gap: 1rem; align-items: center; }
+
+    .contact-btn {
+      background: var(--accent);
+      color: #ffffff !important;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 400;
+      font-size: 0.82rem;
+      white-space: nowrap;
+      text-decoration: none !important;
+      transition: opacity 0.15s;
+    }
+    .contact-btn:hover { opacity: 0.85; }
+    .contact-btn-footer {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.9rem;
+    }
 
     .page-hero {
       background: linear-gradient(135deg, #031f38 0%, #053A5C 60%, #064465 100%);
@@ -386,6 +405,7 @@
     <a href="index.html">Volume &amp; Stage Table</a>
   </nav>
   <span>Last Updated: <strong style="color:white">July 2026</strong></span>
+  <a class="contact-btn" href="https://qtmagneticsolutions.com/contact">Contact Us</a>
 </div>
 
 <div class="page-hero">
@@ -657,6 +677,7 @@
 
 <footer>
   <div style="max-width:1200px; margin:0 auto;">
+    <a class="contact-btn contact-btn-footer" href="https://qtmagneticsolutions.com/contact">Contact Us</a>
     <p style="margin-bottom:0.75rem">
       <strong>U.S. vs. Allies vs. China — Global Magnet Production Context</strong><br>
       Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> ·

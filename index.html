@@ -99,6 +99,26 @@
       border-bottom: 1px solid var(--border);
     }
     .site-header a { color: var(--accent); }
+    .site-header { flex-wrap: wrap; gap: 0.5rem; }
+
+    .contact-btn {
+      background: var(--accent);
+      color: #ffffff !important;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 400;
+      font-size: 0.82rem;
+      white-space: nowrap;
+      text-decoration: none !important;
+      transition: opacity 0.15s;
+    }
+    .contact-btn:hover { opacity: 0.85; }
+    .contact-btn-footer {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.9rem;
+    }
 
     /* ── HERO ── */
     .page-hero {
@@ -504,6 +524,7 @@
   <span><a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> · Research &amp; Intelligence</span>
   <span><a href="global-context.html">US vs. China vs. Allies →</a></span>
   <span>Last Updated: <strong style="color:white">July 2026</strong></span>
+  <a class="contact-btn" href="https://qtmagneticsolutions.com/contact">Contact Us</a>
 </div>
 
 <div class="page-hero">
@@ -519,8 +540,6 @@
       <span>Click headers to sort</span>
       <span>·</span>
       <span>Data current through July 2026</span>
-      <span>·</span>
-      <span><a href="index.html">View full company profiles →</a></span>
     </div>
   </div>
 </div>
@@ -1143,6 +1162,7 @@
 
 <footer>
   <div style="max-width:1400px; margin:0 auto;">
+    <a class="contact-btn contact-btn-footer" href="https://qtmagneticsolutions.com/contact">Contact Us</a>
     <p style="margin-bottom:0.75rem">
       <strong>U.S. Rare Earth Magnet Supply Chain — Volume &amp; Stage Table</strong><br>
       Published and maintained by <a href="https://qtmagneticsolutions.com">QT Magnetic Solutions</a> ·
