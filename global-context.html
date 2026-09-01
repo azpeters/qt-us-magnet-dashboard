@@ -69,6 +69,8 @@
       --c-china: #e2552e;
       --c-allies: #3b82f6;
       --c-us: #0d9488;
+
+      --recent: #c084fc;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -326,6 +328,38 @@
     .stage-table td { padding: 0.9rem 1rem; vertical-align: top; color: var(--text-muted); border-bottom: 1px solid var(--border); }
     .stage-table tr:last-child td { border-bottom: none; }
     .stage-table .stage-name { color: var(--text); font-size: 0.9rem; }
+
+    /* Recently-updated badge (auto-shown for rows edited within the last 30 days) */
+    .recent-badge {
+      font-size: 0.6rem;
+      font-weight: 400;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      white-space: nowrap;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+      background: rgba(192,132,252,0.12);
+      border: 1px solid rgba(192,132,252,0.32);
+      color: #d8b4fe;
+    }
+    .recent-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--recent);
+      flex-shrink: 0;
+    }
+
+    /* Highlight wash on the specific cell whose figures changed within the last 30 days */
+    .cell-updated {
+      background: rgba(192,132,252,0.08);
+      box-shadow: inset 3px 0 0 0 rgba(192,132,252,0.55);
+      border-radius: 3px;
+    }
     .stage-table .stage-segment-tag {
       font-size: 0.6rem;
       text-transform: uppercase;
@@ -404,7 +438,7 @@
   <nav>
     <a href="index.html">Volume &amp; Stage Table</a>
   </nav>
-  <span>Last Updated: <strong style="color:white">July 2026</strong></span>
+  <span>Last Updated: <strong style="color:white">August 2026</strong></span>
   <a class="contact-btn" href="https://qtmagneticsolutions.com/contact">Contact Us</a>
 </div>
 
@@ -418,9 +452,9 @@
       individual stages of the supply chain — mining, separation, alloying, and finished magnets.
     </p>
     <div class="hero-meta">
-      <span><span class="dot"></span> Figures sourced from company dossiers + comparative industry report</span>
+      <span><span class="dot"></span> Figures sourced from company disclosures + comparative industry report</span>
       <span>·</span>
-      <span>Data current through July 2026</span>
+      <span>Data current through August 2026</span>
       <span>·</span>
       <span><a href="index.html">← Full company dashboard</a></span>
     </div>
@@ -591,7 +625,7 @@
     <p class="block-sub">
       The headline magnet-output numbers above are a downstream (finished-magnet) comparison. The table below
       breaks the U.S. side down by pipeline stage, using each company's own disclosed current volumes where
-      available. China/global context is drawn from the comparative industry report and company dossiers where
+      available. China/global context is drawn from the comparative industry report and company disclosures where
       a sourced figure exists; where it doesn't, the gap is stated plainly rather than estimated.
     </p>
     <div class="stage-table-wrap">
@@ -632,12 +666,12 @@
             <td class="china-note">China's April 2025 Tier 1 export controls cover Sm, Gd, Tb, Dy, Lu, Sc, Y — the elements separated at this stage. Per the comparative report, no major operating HREE separation facility exists in the Western world outside Lynas' Malaysia plant; this is the most consequential single chokepoint in the entire non-Chinese chain.</td>
             <td>MP Materials, Energy Fuels, ReElement, Momentum, Phoenix Tailings (metallization), Lynas (Hondo, TX — pre-production)</td>
           </tr>
-          <tr>
+          <tr data-updated="2026-09-01">
             <td class="col-min">
               <div class="stage-name">Reduction &amp; Re-metal</div>
               <span class="stage-segment-tag seg-midstream">Midstream</span>
             </td>
-            <td><span class="us-figure">~200 MT/yr</span> RE metals — Phoenix Tailings, Exeter NH (Nd, Pr, Dy, Tb; America's only operating HREE metallization line) · MP Materials Independence facility (Fort Worth) — NdPr metal, volume not separately disclosed</td>
+            <td data-updated="2026-09-01"><span class="us-figure">~200 kg/yr</span> RE metals (actual current output, Fortune Aug 2026) — Phoenix Tailings, Exeter NH (Nd, Pr, Dy, Tb; America's only operating HREE metallization line) · MP Materials Independence facility (Fort Worth) — NdPr metal, volume not separately disclosed. Phoenix Tailings' Oct 2025 launch target was 200 MT/yr, scaling to 1,000+ MT/yr — not yet reached; near-term target is 120 MT/yr by 2027–28 (DoD-financed Freedom Facility).</td>
             <td class="china-note">China dominates global metal reduction capacity; no US allied nation operates comparable HREE metallization at scale outside this dataset's coverage.</td>
             <td>Phoenix Tailings, MP Materials</td>
           </tr>
@@ -687,7 +721,7 @@
       Global/China/allied figures sourced from "China vs. US Allies vs. United States: Rare Earth Magnet Production —
       Three-Way Comparative Analysis" (Domestic Magnetic Production Project, June 2026), itself drawing on IEA,
       Adamas Intelligence, The Metalnomist, CSIS, and company disclosures. U.S. company figures sourced from
-      individual company dossiers, current through July 2026.
+      individual company disclosures and press coverage, current through August 2026.
     </p>
     <p style="font-size:0.72rem; color:var(--text-dim)">
       This page is provided for research and informational purposes. Percentage splits and 2030 figures are
@@ -700,6 +734,36 @@
 </footer>
 
 <div class="site-watermark" aria-hidden="true">qtmagneticsolutions.com</div>
+
+<script>
+  // Recently-updated indicators: badge on the row, highlight wash on the specific cell that changed.
+  // Auto-shown for 30 days from each element's data-updated date, then fade away on their own — no manual cleanup.
+  (function applyRecentIndicators() {
+    const RECENT_DAYS = 30;
+    function isRecentUpdate(iso) {
+      if (!iso) return false;
+      const updated = new Date(iso + 'T00:00:00Z');
+      const days = (Date.now() - updated.getTime()) / 86400000;
+      return days >= 0 && days <= RECENT_DAYS;
+    }
+    document.querySelectorAll('[data-updated]').forEach(el => {
+      const iso = el.dataset.updated;
+      if (!isRecentUpdate(iso)) return;
+      if (el.tagName === 'TR') {
+        const label = new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+        const badge = document.createElement('span');
+        badge.className = 'recent-badge';
+        badge.textContent = `Updated ${label}`;
+        badge.title = `Figures in this row were last updated ${iso}`;
+        const target = el.querySelector('.company-name') || el.querySelector('.stage-name') || el.firstElementChild;
+        if (target) target.appendChild(badge);
+      } else {
+        el.classList.add('cell-updated');
+        el.title = `Updated ${iso}`;
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
