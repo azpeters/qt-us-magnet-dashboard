@@ -69,6 +69,8 @@
       --c-china: #e2552e;
       --c-allies: #3b82f6;
       --c-us: #0d9488;
+
+      --recent: #c084fc;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -326,6 +328,31 @@
     .stage-table td { padding: 0.9rem 1rem; vertical-align: top; color: var(--text-muted); border-bottom: 1px solid var(--border); }
     .stage-table tr:last-child td { border-bottom: none; }
     .stage-table .stage-name { color: var(--text); font-size: 0.9rem; }
+
+    /* Recently-updated badge (auto-shown for rows edited within the last 30 days) */
+    .recent-badge {
+      font-size: 0.6rem;
+      font-weight: 400;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      white-space: nowrap;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+      background: rgba(192,132,252,0.12);
+      border: 1px solid rgba(192,132,252,0.32);
+      color: #d8b4fe;
+    }
+    .recent-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--recent);
+      flex-shrink: 0;
+    }
     .stage-table .stage-segment-tag {
       font-size: 0.6rem;
       text-transform: uppercase;
@@ -632,7 +659,7 @@
             <td class="china-note">China's April 2025 Tier 1 export controls cover Sm, Gd, Tb, Dy, Lu, Sc, Y — the elements separated at this stage. Per the comparative report, no major operating HREE separation facility exists in the Western world outside Lynas' Malaysia plant; this is the most consequential single chokepoint in the entire non-Chinese chain.</td>
             <td>MP Materials, Energy Fuels, ReElement, Momentum, Phoenix Tailings (metallization), Lynas (Hondo, TX — pre-production)</td>
           </tr>
-          <tr>
+          <tr data-updated="2026-09-01">
             <td class="col-min">
               <div class="stage-name">Reduction &amp; Re-metal</div>
               <span class="stage-segment-tag seg-midstream">Midstream</span>
@@ -700,6 +727,27 @@
 </footer>
 
 <div class="site-watermark" aria-hidden="true">qtmagneticsolutions.com</div>
+
+<script>
+  // Recently-updated badges: auto-shown for 30 days from a row's data-updated date, then fade away on their own
+  (function renderRecentBadges() {
+    const RECENT_DAYS = 30;
+    const now = Date.now();
+    document.querySelectorAll('[data-updated]').forEach(row => {
+      const iso = row.dataset.updated;
+      const updated = new Date(iso + 'T00:00:00Z');
+      const days = (now - updated.getTime()) / 86400000;
+      if (days < 0 || days > RECENT_DAYS) return;
+      const label = updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+      const badge = document.createElement('span');
+      badge.className = 'recent-badge';
+      badge.textContent = `Updated ${label}`;
+      badge.title = `Figures in this row were last updated ${iso}`;
+      const target = row.querySelector('.company-name') || row.querySelector('.stage-name') || row.firstElementChild;
+      if (target) target.appendChild(badge);
+    });
+  })();
+</script>
 
 </body>
 </html>

@@ -73,6 +73,7 @@
       --development: #fb923c;
       --announced: #94a3b8;
       --paused: #f87171;
+      --recent: #c084fc;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -403,6 +404,31 @@
     .mat-mixed { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: var(--text-muted); }
     .mat-mixed::before { background: linear-gradient(90deg, var(--commercial) 50%, var(--commissioning) 50%); }
 
+    /* Recently-updated badge (auto-shown for rows edited within the last 30 days) */
+    .recent-badge {
+      font-size: 0.6rem;
+      font-weight: 400;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      white-space: nowrap;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+      background: rgba(192,132,252,0.12);
+      border: 1px solid rgba(192,132,252,0.32);
+      color: #d8b4fe;
+    }
+    .recent-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--recent);
+      flex-shrink: 0;
+    }
+
     /* Volume cells */
     .td-vol { min-width: 160px; }
     .vol-number {
@@ -680,7 +706,7 @@
       <tbody id="tableBody">
 
         <!-- MP MATERIALS -->
-        <tr data-segments="upstream midstream downstream" data-maturity="commercial commissioning" data-name="mp materials corp mountain pass fort worth northlake" data-current="1000" data-projected="11000" data-year="2028" data-maturity-order="1">
+        <tr data-segments="upstream midstream downstream" data-maturity="commercial commissioning" data-name="mp materials corp mountain pass fort worth northlake" data-current="1000" data-projected="11000" data-year="2028" data-maturity-order="1" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">MP Materials Corp.</div>
             <span class="company-ticker">NYSE: MP</span>
@@ -713,7 +739,7 @@
         </tr>
 
         <!-- USA RARE EARTH -->
-        <tr data-segments="upstream midstream downstream" data-maturity="commercial commissioning development" data-name="usa rare earth USAR stillwater oklahoma round top LCM less common metals serra verde" data-current="600" data-projected="10000" data-year="2028" data-maturity-order="1">
+        <tr data-segments="upstream midstream downstream" data-maturity="commercial commissioning development" data-name="usa rare earth USAR stillwater oklahoma round top LCM less common metals serra verde" data-current="600" data-projected="10000" data-year="2028" data-maturity-order="1" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">USA Rare Earth, Inc.</div>
             <span class="company-ticker">NASDAQ: USAR</span>
@@ -802,7 +828,7 @@
         </tr>
 
         <!-- ENERGY FUELS -->
-        <tr data-segments="midstream" data-maturity="commercial pilot" data-name="Energy Fuels White Mesa Mill uranium dysprosium terbium NdPr oxide separation Utah UUUU" data-current="500" data-projected="1000" data-year="2027" data-maturity-order="1">
+        <tr data-segments="midstream" data-maturity="commercial pilot" data-name="Energy Fuels White Mesa Mill uranium dysprosium terbium NdPr oxide separation Utah UUUU" data-current="500" data-projected="1000" data-year="2027" data-maturity-order="1" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">Energy Fuels Inc.</div>
             <span class="company-ticker">NYSE: UUUU</span>
@@ -915,7 +941,7 @@
         </tr>
 
         <!-- PHOENIX TAILINGS -->
-        <tr data-segments="midstream" data-maturity="pilot" data-name="Phoenix Tailings Exeter New Hampshire rare earth metallization reduction BMW Yamaha Motor" data-current="0" data-projected="120" data-year="2028" data-maturity-order="3">
+        <tr data-segments="midstream" data-maturity="pilot" data-name="Phoenix Tailings Exeter New Hampshire rare earth metallization reduction BMW Yamaha Motor" data-current="0" data-projected="120" data-year="2028" data-maturity-order="3" data-updated="2026-09-01">
           <td class="td-company">
             <div class="company-name">Phoenix Tailings, Inc.</div>
             <span class="company-ticker">Private (BMW, Yamaha)</span>
@@ -942,7 +968,7 @@
         </tr>
 
         <!-- RELEMENT TECHNOLOGIES -->
-        <tr data-segments="midstream" data-maturity="pilot" data-name="ReElement Technologies AREC American Resources Noblesville Marion Indiana chromatographic separation" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3">
+        <tr data-segments="midstream" data-maturity="pilot" data-name="ReElement Technologies AREC American Resources Noblesville Marion Indiana chromatographic separation" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">ReElement Technologies Corp.</div>
             <span class="company-ticker">Parent: NASDAQ: AREC</span>
@@ -994,7 +1020,7 @@
         </tr>
 
         <!-- AMERICAN RESOURCES / EMCO -->
-        <tr data-segments="upstream" data-maturity="pilot" data-name="American Resources Corporation AREC Electrified Materials EMCO Noblesville Indiana e-waste recycling" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3">
+        <tr data-segments="upstream" data-maturity="pilot" data-name="American Resources Corporation AREC Electrified Materials EMCO Noblesville Indiana e-waste recycling" data-current="0" data-projected="0" data-year="2026" data-maturity-order="3" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">American Resources / Electrified Materials</div>
             <span class="company-ticker">NASDAQ: AREC</span>
@@ -1071,7 +1097,7 @@
         </tr>
 
         <!-- NIRON MAGNETICS -->
-        <tr data-segments="downstream" data-maturity="development" data-name="Niron Magnetics iron nitride FeN rare earth free Sartell Minnesota ARPA-E" data-current="0" data-projected="1500" data-year="2027" data-maturity-order="4">
+        <tr data-segments="downstream" data-maturity="development" data-name="Niron Magnetics iron nitride FeN rare earth free Sartell Minnesota ARPA-E" data-current="0" data-projected="1500" data-year="2027" data-maturity-order="4" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">Niron Magnetics, Inc. ⚠️ RE-Free</div>
             <span class="company-ticker">Private (ARPA-E)</span>
@@ -1098,7 +1124,7 @@
         </tr>
 
         <!-- REALLOYS -->
-        <tr data-segments="midstream downstream" data-maturity="development" data-name="REalloys ALOY JOGMEC Japan Euclid Ohio Saskatchewan magnets defense" data-current="0" data-projected="10000" data-year="2027" data-maturity-order="4">
+        <tr data-segments="midstream downstream" data-maturity="development" data-name="REalloys ALOY JOGMEC Japan Euclid Ohio Saskatchewan magnets defense" data-current="0" data-projected="10000" data-year="2027" data-maturity-order="4" data-updated="2026-08-27">
           <td class="td-company">
             <div class="company-name">REalloys, Inc.</div>
             <span class="company-ticker">NASDAQ: ALOY</span>
@@ -1304,6 +1330,25 @@
 
   // Initial sort by company name
   sortTable('company');
+
+  // Recently-updated badges: auto-shown for 30 days from a row's data-updated date, then fade away on their own
+  (function renderRecentBadges() {
+    const RECENT_DAYS = 30;
+    const now = Date.now();
+    document.querySelectorAll('[data-updated]').forEach(row => {
+      const iso = row.dataset.updated;
+      const updated = new Date(iso + 'T00:00:00Z');
+      const days = (now - updated.getTime()) / 86400000;
+      if (days < 0 || days > RECENT_DAYS) return;
+      const label = updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+      const badge = document.createElement('span');
+      badge.className = 'recent-badge';
+      badge.textContent = `Updated ${label}`;
+      badge.title = `Figures in this row were last updated ${iso}`;
+      const target = row.querySelector('.company-name') || row.querySelector('.stage-name') || row.firstElementChild;
+      if (target) target.appendChild(badge);
+    });
+  })();
 </script>
 
 </body>
