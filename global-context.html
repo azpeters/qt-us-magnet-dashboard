@@ -353,6 +353,13 @@
       background: var(--recent);
       flex-shrink: 0;
     }
+
+    /* Highlight wash on the specific cell whose figures changed within the last 30 days */
+    .cell-updated {
+      background: rgba(192,132,252,0.08);
+      box-shadow: inset 3px 0 0 0 rgba(192,132,252,0.55);
+      border-radius: 3px;
+    }
     .stage-table .stage-segment-tag {
       font-size: 0.6rem;
       text-transform: uppercase;
@@ -664,7 +671,7 @@
               <div class="stage-name">Reduction &amp; Re-metal</div>
               <span class="stage-segment-tag seg-midstream">Midstream</span>
             </td>
-            <td><span class="us-figure">~200 kg/yr</span> RE metals (actual current output, Fortune Aug 2026) — Phoenix Tailings, Exeter NH (Nd, Pr, Dy, Tb; America's only operating HREE metallization line) · MP Materials Independence facility (Fort Worth) — NdPr metal, volume not separately disclosed. Phoenix Tailings' Oct 2025 launch target was 200 MT/yr, scaling to 1,000+ MT/yr — not yet reached; near-term target is 120 MT/yr by 2027–28 (DoD-financed Freedom Facility).</td>
+            <td data-updated="2026-09-01"><span class="us-figure">~200 kg/yr</span> RE metals (actual current output, Fortune Aug 2026) — Phoenix Tailings, Exeter NH (Nd, Pr, Dy, Tb; America's only operating HREE metallization line) · MP Materials Independence facility (Fort Worth) — NdPr metal, volume not separately disclosed. Phoenix Tailings' Oct 2025 launch target was 200 MT/yr, scaling to 1,000+ MT/yr — not yet reached; near-term target is 120 MT/yr by 2027–28 (DoD-financed Freedom Facility).</td>
             <td class="china-note">China dominates global metal reduction capacity; no US allied nation operates comparable HREE metallization at scale outside this dataset's coverage.</td>
             <td>Phoenix Tailings, MP Materials</td>
           </tr>
@@ -729,22 +736,31 @@
 <div class="site-watermark" aria-hidden="true">qtmagneticsolutions.com</div>
 
 <script>
-  // Recently-updated badges: auto-shown for 30 days from a row's data-updated date, then fade away on their own
-  (function renderRecentBadges() {
+  // Recently-updated indicators: badge on the row, highlight wash on the specific cell that changed.
+  // Auto-shown for 30 days from each element's data-updated date, then fade away on their own — no manual cleanup.
+  (function applyRecentIndicators() {
     const RECENT_DAYS = 30;
-    const now = Date.now();
-    document.querySelectorAll('[data-updated]').forEach(row => {
-      const iso = row.dataset.updated;
+    function isRecentUpdate(iso) {
+      if (!iso) return false;
       const updated = new Date(iso + 'T00:00:00Z');
-      const days = (now - updated.getTime()) / 86400000;
-      if (days < 0 || days > RECENT_DAYS) return;
-      const label = updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
-      const badge = document.createElement('span');
-      badge.className = 'recent-badge';
-      badge.textContent = `Updated ${label}`;
-      badge.title = `Figures in this row were last updated ${iso}`;
-      const target = row.querySelector('.company-name') || row.querySelector('.stage-name') || row.firstElementChild;
-      if (target) target.appendChild(badge);
+      const days = (Date.now() - updated.getTime()) / 86400000;
+      return days >= 0 && days <= RECENT_DAYS;
+    }
+    document.querySelectorAll('[data-updated]').forEach(el => {
+      const iso = el.dataset.updated;
+      if (!isRecentUpdate(iso)) return;
+      if (el.tagName === 'TR') {
+        const label = new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+        const badge = document.createElement('span');
+        badge.className = 'recent-badge';
+        badge.textContent = `Updated ${label}`;
+        badge.title = `Figures in this row were last updated ${iso}`;
+        const target = el.querySelector('.company-name') || el.querySelector('.stage-name') || el.firstElementChild;
+        if (target) target.appendChild(badge);
+      } else {
+        el.classList.add('cell-updated');
+        el.title = `Updated ${iso}`;
+      }
     });
   })();
 </script>
